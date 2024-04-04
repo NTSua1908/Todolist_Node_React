@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
+const databaseUrl = process.env.DATABASE_URL;
 
 function connect() {
-  return mongoose.connect(
-    "mongodb+srv://admin:V2a7ewqY73jusrpR@cluster0.pmosntk.mongodb.net/todolist?retryWrites=true&w=majority&appName=Cluster0"
-  );
+  return mongoose.connect(databaseUrl);
 }
 
 module.exports = { connect };
