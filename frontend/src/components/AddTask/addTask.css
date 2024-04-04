@@ -1,0 +1,31 @@
+.addTask {
+  width: 400px;
+  display: flex;
+  height: 40px;
+  border-radius: 15px;
+  border-top: 1px solid #00c17c;
+  border-bottom: 1px solid #00c17c;
+  border-left: 3px solid #00c17c;
+  border-right: 2px solid #00c17c;
+
+  overflow: hidden;
+}
+
+.addTask .addTask-input {
+  flex: 6;
+  background-color: #404357;
+  outline: none;
+  border: none;
+  color: #f0f0f2;
+  padding-left: 20px;
+}
+
+.addTask .addTask-button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00c17c;
+  border-left: 2px solid #00c17c;
+  cursor: pointer;
+}
