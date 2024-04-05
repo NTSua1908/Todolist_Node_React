@@ -1,0 +1,43 @@
+# Get all task
+GET http://localhost:3001/api/task/getAll
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MGZhMDI5YTU5OTAzZGYxMWRlNTNlZCIsInVzZXJuYW1lIjoiTlRTdWEiLCJyb2xlcyI6WzJdLCJpYXQiOjE3MTIzMDc3OTEsImV4cCI6MTcxMjMxMTM5MX0.neJQh4aeh0EqnG69mbpWMYAtZbFd0IZmhtkoq1uefU0
+
+
+### Create task
+POST http://localhost:3001/api/task/create
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MGZhMDI5YTU5OTAzZGYxMWRlNTNlZCIsInVzZXJuYW1lIjoiTlRTdWEiLCJyb2xlcyI6WzJdLCJpYXQiOjE3MTIzMDc3OTEsImV4cCI6MTcxMjMxMTM5MX0.neJQh4aeh0EqnG69mbpWMYAtZbFd0IZmhtkoq1uefU0
+
+{
+  "name" : "Học bài nè",
+  "description" : "Học một cái gì đó, học một cái gì đó"
+}
+
+### ========> Auth
+### User login
+POST http://localhost:3001/api/auth/login
+content-type: application/json
+
+{
+  "username": "NTSua",
+  "password": "User@123"
+}
+
+### Amin login
+POST http://localhost:3001/api/auth/login
+content-type: application/json
+
+{
+  "username": "admin",
+  "password": "Admin@123"
+}
+
+### Refresh Token
+POST http://localhost:3001/api/auth/refreshToken
+content-type: application/json
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZXMiOlswXSwiaWF0IjoxNzEyMzAyODI5LCJleHAiOjE3MTQ4OTQ4Mjl9.eDBwP9wg_svaF8EUan67fT87wUytQuuWAMvDC7Lvqho"
+}
+
+

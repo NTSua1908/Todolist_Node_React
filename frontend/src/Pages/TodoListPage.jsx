@@ -4,10 +4,13 @@ import TaskBlock from "../components/TaskBlock/TaskBlock";
 import { Delete, GetAllTask, Update, Create } from "../services/TaskService";
 import "./todoListPage.css";
 import Modal from "../components/Modal/Modal";
+import Pagination from "../components/Pagination/Pagination";
+import Loader from "../components/Loading/Loader";
 
 function TodoListPage(props) {
   const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState();
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -49,13 +52,18 @@ function TodoListPage(props) {
       setLoading(true);
       GetAllTask(searchText, page, 10)
         .then((res) => {
-          setTasks(res.data.tasks);
+          setTasks(res.data.data);
+          setTotalPages(res.data.totalPages);
         })
         .catch((error) => {})
         .finally(() => {
           setLoading(false);
         });
     }
+  };
+
+  const handlePageChange = (page) => {
+    setPage(page);
   };
 
   return (
@@ -75,6 +83,14 @@ function TodoListPage(props) {
           ))}
         </div>
       </div>
+      <div className='todolist-tasks-pagination'>
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      </div>
+      {loading && <Loader />}
     </div>
   );
 }

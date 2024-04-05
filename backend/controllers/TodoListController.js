@@ -2,27 +2,43 @@ const Task = require("../models/TodoList");
 
 class TodoListController {
   async getAll(req, res, next) {
-    const page = parseInt(req.query.page) || 0;
-    const amount = parseInt(req.query.amount) || 10;
+    let page = parseInt(req.query.page) || 0;
+    let amount = parseInt(req.query.amount) || 10;
+    const user = req.id;
 
-    await Task.find()
-      .skip(page * amount)
-      .limit(amount)
-      .exec()
-      .then((result) => {
-        res.status(200).json({ tasks: result });
-      })
-      .catch((error) => {
-        res.status(500).json({ error });
-      });
+    page = page < 0 ? 0 : page;
+    amount = amount < 0 ? 10 : amount;
+
+    try {
+      Task.find({ user })
+        .skip(page * amount)
+        .limit(amount)
+        .exec()
+        .then((results) => {
+          Task.countDocuments().then((count) => {
+            const totalPages = Math.ceil(count / amount);
+            res.status(200).json({
+              data: results,
+              currentPage: parseInt(page),
+              totalPages: totalPages,
+            });
+          });
+        });
+    } catch (error) {
+      res.status(500).json({ error });
+    }
   }
 
   async create(req, res, next) {
     const { name, description } = req.body;
+
+    const user = req.id;
+
     const newTask = new Task({
       name,
       description,
       isDone: false,
+      user,
     });
     await newTask
       .save()
@@ -37,8 +53,10 @@ class TodoListController {
   async update(req, res, next) {
     const _id = req.params.id;
     const { name, description } = req.body;
+    const user = req.id;
+
     await Task.findOneAndUpdate(
-      { _id },
+      { _id, user },
       {
         name,
         description,
@@ -54,7 +72,8 @@ class TodoListController {
 
   async delete(req, res, next) {
     const _id = req.params.id;
-    await Task.deleteOne({ _id })
+    const user = req.id;
+    await Task.deleteOne({ _id, user })
       .then(() => {
         res.status(200).json();
       })
@@ -65,7 +84,8 @@ class TodoListController {
 
   async toggleDoneTask(req, res, next) {
     const _id = req.params.id;
-    let task = await Task.findOne({ _id });
+    const user = req.id;
+    let task = await Task.findOne({ _id, user });
     task.isDone = !task.isDone;
     await task
       .save()

@@ -1,0 +1,33 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0px;
+}
+
+.pagination .pagination-function {
+  margin: 0px 10px;
+  padding: 5px 10px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  background-color: transparent;
+  font-size: 15px;
+  cursor: pointer;
+  color: #f0f0f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pagination .pagination-function:hover {
+  background-color: rgba(121, 121, 121, 0.2);
+}
+
+.pagination .pagination-function:disabled {
+  cursor: not-allowed;
+}
+
+.pagination .pagination-current {
+  color: #f0f0f2;
+  font-weight: 800;
+}
