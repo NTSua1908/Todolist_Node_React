@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 import "./pagination.css";
 
-function Pagination(props) {
+interface PaginationProps {
+  totalPages: number;
+  currentPage: number;
+  onPageChange: (page: number) => Promise<void>;
+}
+
+const Pagination: React.FC<PaginationProps> = (props) => {
   const { totalPages, onPageChange } = props;
 
   const [currentPage, setCurrentPage] = useState(props.currentPage);
@@ -42,6 +48,6 @@ function Pagination(props) {
       </button>
     </div>
   );
-}
+};
 
 export default Pagination;

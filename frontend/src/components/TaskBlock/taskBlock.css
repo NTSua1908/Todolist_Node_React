@@ -1,69 +1,25 @@
+@import url(../../theme.css);
+
 .taskBlock {
   border-radius: 15px;
-  background-color: #404357;
   display: flex;
-  color: #f0f0f2;
   padding: 15px 0px;
-  width: 400px;
-  margin-top: 15px;
-  border-right: 2px solid #00c17c;
-  border-left: 2px solid #00c17c;
-  min-height: 105px;
-  /* border-bottom: 1px solid #00c17c;
-  border-top: 1px solid #00c17c; */
+  width: 350px;
+  margin: 10px;
+  min-height: 80px;
+}
+
+.taskBlock.dark {
+  background-color: var(--task-dark);
+  color: var(--text-dark);
+}
+.taskBlock.light {
+  background-color: var(--task-light);
+  color: var(--text-light);
 }
 
 .taskBlock .taskBlock-content {
   flex: 5;
   text-align: left;
   padding-left: 40px;
-}
-
-.taskBlock .taskBlock-content .taskBlock-content-edit-name,
-.taskBlock .taskBlock-content .taskBlock-content-edit-description {
-  outline: none;
-  border: 1px solid #f0f0f2;
-  padding: 5px 10px;
-  border-radius: 5px;
-  background-color: #404357;
-  color: #f0f0f2;
-  width: 290px;
-}
-
-.taskBlock .taskBlock-content .taskBlock-content-edit-description {
-  margin-top: 10px;
-  max-width: 290px;
-  min-width: 290px;
-}
-
-.taskBlock .taskBlock-content .taskBlock-content-name h3 {
-  padding: 0px;
-  margin: 0px;
-}
-
-.taskBlock .taskBlock-content .taskBlock-content-description {
-  font-size: 13px;
-  margin-top: 10px;
-}
-
-.taskBlock .taskBlock-function {
-  flex: 1;
-}
-
-.taskBlock .taskBlock-function .taskBlock-function-container {
-  cursor: pointer;
-  padding: 2px 1px;
-}
-
-.taskBlock .taskBlock-function .taskBlock-function-container.edit {
-  color: #00c17c;
-}
-
-.taskBlock .taskBlock-function .taskBlock-function-container.delete {
-  color: #ff5252;
-}
-
-.taskBlock .taskBlock-function .taskBlock-function-container:hover.edit,
-.taskBlock .taskBlock-function .taskBlock-function-container:hover.delete {
-  transform: scale(1.2);
 }

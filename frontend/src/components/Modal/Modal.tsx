@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import "./modal.css";
 
-function Modal(props) {
-  const { title, onAccept, isShow, setShow, id } = props;
+interface ModalProps {
+  title: string;
+  id: string;
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
+  onAccept: (id: string) => Promise<void>;
+}
 
+const Modal: React.FC<ModalProps> = ({ title, onAccept, setShow, id }) => {
   const [loading, setLoading] = useState(false);
 
   const handleCancel = () => {
@@ -19,7 +24,7 @@ function Modal(props) {
   };
 
   return (
-    <div className={`modal ${isShow && "show"}`}>
+    <div className='modal'>
       <div className='modal-background' onClick={() => handleCancel()}></div>
       <div className='modal-container'>
         <div className='modal-content'>
@@ -46,6 +51,6 @@ function Modal(props) {
       </div>
     </div>
   );
-}
+};
 
 export default Modal;

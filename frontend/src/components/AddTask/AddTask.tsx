@@ -2,24 +2,28 @@ import React, { useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { FiLoader } from "react-icons/fi";
 import "./addTask.css";
+import CreateTaskModel from "../../models/TaskModel/TaskCreateModel";
 
-function AddTask(props) {
-  const { onCreate } = props;
+interface AddTaskProps {
+  onCreate: (task: CreateTaskModel) => Promise<void>;
+}
 
+const AddTask: React.FC<AddTaskProps> = ({ onCreate }) => {
   const [name, setName] = useState("");
+  const [labels, setLabels] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
 
   const handleAddTask = () => {
     if (!loading && name.length != 0) {
       setLoading(true);
-      onCreate({ name, description: "" })
-        .then(() => {
-          setName("");
-        })
-        .catch((error) => {})
-        .finally(() => {
-          setLoading(false);
-        });
+      // onCreate({ name, labels })
+      //   .then(() => {
+      //     setName("");
+      //   })
+      //   .catch((error) => {})
+      //   .finally(() => {
+      //     setLoading(false);
+      //   });
     }
   };
 
@@ -41,6 +45,6 @@ function AddTask(props) {
       </div>
     </div>
   );
-}
+};
 
 export default AddTask;

@@ -1,0 +1,27 @@
+.column {
+  width: 380px;
+  border-radius: 20px;
+  margin: 20px;
+  background-color: #24262c;
+}
+
+.column .column-header {
+  height: 60px;
+  width: 100%;
+  user-select: none;
+  border-radius: 20px;
+  line-height: 60px;
+  font-size: 18px;
+  text-align: left;
+  font-weight: 600;
+  padding-left: 40px;
+  background-color: #24262c;
+  color: #f0f0f0;
+}
+
+.column .column-content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: calc(100% - 60px);
+  max-height: calc(100% - 60px);
+}

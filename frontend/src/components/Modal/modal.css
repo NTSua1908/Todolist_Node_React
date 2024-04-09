@@ -9,10 +9,6 @@
   align-items: center;
   justify-content: center;
   color: #f0f0f2;
-  display: none;
-}
-
-.modal.show {
   display: flex;
 }
 
