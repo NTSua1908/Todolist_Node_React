@@ -4,7 +4,7 @@ const labels: LabelModel[] = [
   {
     id: "8e44543e-2f87-4cd3-8dd3-b7508c08d051",
     name: "Backend",
-    color: "#eee600",
+    color: "#f0bc00",
   },
   {
     id: "f114be37-f091-4080-96d7-8c8412be6ee4",

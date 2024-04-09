@@ -2,6 +2,7 @@ import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { useTheme } from "../../hooks/ThemeContext";
 import TaskListModel from "../../models/TaskModel/TaskListModel";
+import { FaBarsProgress } from "react-icons/fa6";
 import "./taskBlock.css";
 
 interface TaskBlockProps {
@@ -27,9 +28,13 @@ const TaskBlock: React.FC<TaskBlockProps> = ({ task, index }) => {
             </div>
             <div className='taskBlock-labels'>
               {task.labels.map((label, index) => (
-                <div key={index} className='taskBlock-labels-item'>
-                  {label}
-                </div>
+                <span
+                  style={{ backgroundColor: label.color }}
+                  key={index}
+                  className='taskBlock-labels-item'
+                >
+                  {label.name}
+                </span>
               ))}
             </div>
           </div>
@@ -40,3 +45,30 @@ const TaskBlock: React.FC<TaskBlockProps> = ({ task, index }) => {
 };
 
 export default React.memo(TaskBlock);
+
+interface TaskProgressProps {
+  taskDoneCount: number;
+  taskTotalCount: number;
+}
+
+const TaskProgress: React.FC<TaskProgressProps> = ({
+  taskDoneCount,
+  taskTotalCount,
+}) => {
+  return (
+    <div className='taskProgress'>
+      <div className='taskProgress-header'>
+        <div className='taskProgress-header-label'>
+          <span>
+            <FaBarsProgress />
+          </span>
+          Progress
+        </div>
+        <div className='taskProgress-header-status'>
+          {taskDoneCount}/{taskTotalCount}
+        </div>
+      </div>
+      <div className='taskProgress-percent'></div>
+    </div>
+  );
+};

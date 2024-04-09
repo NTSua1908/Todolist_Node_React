@@ -20,8 +20,10 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const storedTheme = localStorage.getItem("theme");
     if (
       !storedTheme ||
-      (Object.keys(ThemeName).includes(storedTheme) &&
-        typeof ThemeName[storedTheme as keyof typeof ThemeName] !== "undefined")
+      !(
+        Object.keys(ThemeName).includes(storedTheme) &&
+        typeof ThemeName[storedTheme as keyof typeof ThemeName] !== "undefined"
+      )
     ) {
       return ThemeName[ThemeName.light];
     }
