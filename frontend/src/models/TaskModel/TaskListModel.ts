@@ -4,6 +4,7 @@ import UserShortModel from "../User/UserShortModel";
 interface TaskListModel {
   id: string;
   name: string;
+  index: number;
   labels: LabelModel[];
   user: UserShortModel;
   taskTotalCount: number;

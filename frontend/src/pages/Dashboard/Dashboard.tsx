@@ -8,11 +8,13 @@ import "./dashboard.css";
 import { dashboard } from "../../mock/dashboard";
 import Columns from "../../components/Columns/Columns";
 import Board from "../../components/Board/Board";
+import { useTheme } from "../../hooks/ThemeContext";
 
 function Dashboard() {
   const [searchText, setSearchText] = useState("");
   const [tasks, setTasks] = useState<ColumnDashboardModel[]>([]);
   const [loading, setLoading] = useState(false);
+  const { theme } = useTheme();
 
   const [api, contextHolder] = notification.useNotification();
   const openNotificationSuccess = () => {
@@ -55,7 +57,7 @@ function Dashboard() {
 
   // console.log(tasks);
   return (
-    <div className='todolist'>
+    <div className={`todolist ${theme}`}>
       {contextHolder}
       <div className='todolist-tasks-container'>
         <div className='todolist-tasks'>

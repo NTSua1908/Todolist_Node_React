@@ -4,6 +4,7 @@ import ColumnDashboardModel from "../../models/ColumnsModel/ColumnsDashboardMode
 import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 import { Result } from "antd";
 import Columns from "../Columns/Columns";
+import TaskCreateModel from "../../models/TaskModel/TaskCreateModel";
 
 interface BoardProps {
   columns: ColumnDashboardModel[];
@@ -84,6 +85,8 @@ function Board({ columns }: BoardProps) {
     }
   };
 
+  const onCreateTask = async (task: TaskCreateModel) => {};
+
   return (
     <div className='board'>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -101,7 +104,12 @@ function Board({ columns }: BoardProps) {
               {...provided.droppableProps}
             >
               {data.map((column, index) => (
-                <Columns key={column.id} column={column} index={index} />
+                <Columns
+                  key={column.id}
+                  column={column}
+                  index={index}
+                  onCreateTask={onCreateTask}
+                />
               ))}
               {provided.placeholder}
             </div>

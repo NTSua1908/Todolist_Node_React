@@ -5,7 +5,7 @@
   display: flex;
   padding: 15px 0px;
   width: 350px;
-  margin: 10px;
+  margin: 0px 10px 12px 0px;
   min-height: 90px;
   /* box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.1); */
 }
@@ -22,24 +22,111 @@
 .taskBlock .taskBlock-content {
   flex: 5;
   text-align: left;
-  padding-left: 30px;
-  padding-right: 10px;
+  padding: 0px 20px;
 }
 
 .taskBlock .taskBlock-content .taskBlock-content-name {
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.taskBlock .taskBlock-content .taskBlock-content-name h4 {
+  font-weight: 500;
+  padding: 5px 0px;
+  line-height: 23px;
+  margin-right: 10px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  font-size: 15px;
 }
 
-.taskBlock .taskBlock-labels .taskBlock-labels-item {
+.taskBlock
+  .taskBlock-content
+  .taskBlock-content-name
+  .taskBlock-content-name-index {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.taskBlock .taskBlock-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.taskBlock .taskBlock-info-labels {
+  flex: 7;
+}
+
+.taskBlock .taskBlock-info-labels .taskBlock-info-labels-item {
   display: inline-block;
   padding: 3px 10px;
   border-radius: 10px;
   margin-right: 10px;
   margin-top: 10px;
   font-size: 14px;
+  color: #f0f0f0;
+}
+
+.taskBlock .taskBlock-info .taskBlock-info-user {
+  flex: 1;
+}
+
+.taskBlock .taskBlock-info .taskBlock-info-user img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
+  border: 1px solid #c5c5c5;
+}
+
+/* Task progress */
+
+.taskProgress {
+  padding: 8px 0px;
+}
+
+.taskProgress .taskProgress-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.taskProgress .taskProgress-header .taskProgress-header-label {
+  font-size: 12px;
+}
+.taskProgress
+  .taskProgress-header
+  .taskProgress-header-label
+  .taskProgress-header-label-icon {
+  padding-right: 10px;
+}
+
+.taskProgress .taskProgress-header .taskProgress-header-status {
+  font-size: 14px;
+}
+
+.taskProgress .taskProgress-percent {
+  height: 5px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+
+.taskProgress.dark .taskProgress-percent {
+  background-color: var(--task-progress-dark);
+}
+
+.taskProgress.light .taskProgress-percent {
+  background-color: var(--column-light);
+}
+
+.taskProgress .taskProgress-percent .taskProgress-percent-completed {
+  height: 100%;
 }

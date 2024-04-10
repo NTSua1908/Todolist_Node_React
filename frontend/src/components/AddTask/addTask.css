@@ -1,31 +1,56 @@
-.addTask {
-  width: 400px;
-  display: flex;
-  height: 40px;
-  border-radius: 15px;
-  border-top: 1px solid #00c17c;
-  border-bottom: 1px solid #00c17c;
-  border-left: 3px solid #00c17c;
-  border-right: 2px solid #00c17c;
+@import url("../../theme.css");
 
-  overflow: hidden;
+.addTask {
+  border-radius: 15px;
+  padding: 20px;
+  width: 350px;
+  margin-bottom: 12px;
+}
+.addTask.dark {
+  background-color: var(--task-dark);
+  color: var(--text-dark);
+}
+.addTask.light {
+  background-color: var(--task-light);
+  color: var(--text-light);
+}
+
+.addTask .addTask-title {
+  font-weight: 600;
 }
 
 .addTask .addTask-input {
-  flex: 6;
-  background-color: #404357;
+  width: 100%;
+  border-radius: 8px;
+  height: 35px;
+  line-height: 35px;
+  border: 1px solid #ccc;
   outline: none;
-  border: none;
-  color: #f0f0f2;
-  padding-left: 20px;
+  padding: 0px 10px;
+  margin: 10px 0px;
 }
 
-.addTask .addTask-button {
-  flex: 1;
+.addTask.dark .addTask-input {
+  background-color: var(--task-progress-dark);
+  color: var(--text-dark);
+}
+
+.addTask .addTask-function {
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: #00c17c;
-  border-left: 2px solid #00c17c;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.addTask .addTask-function .addTask-function-button {
+  outline: none;
+  border: 1px solid #ccc;
+  padding: 5px 15px;
+  border-radius: 5px;
   cursor: pointer;
+}
+
+.addTask.dark .addTask-function .addTask-function-button {
+  background-color: var(--task-progress-dark);
+  color: var(--text-dark);
 }

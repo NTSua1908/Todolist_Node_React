@@ -8,14 +8,12 @@
   --scrollbar-thumb-hover-dark: #555;
   --scrollbar-track-dark: #333;
   --scrollbar-thumb-active-dark: #666;
+  --task-progress-dark: #3f4147;
 
   /* Light theme colors */
   --background-light: #ffffff;
   --text-light: #333238;
   --task-light: #ffffff;
   --column-light: #ececef;
-  --scrollbar-thumb-light: #888;
-  --scrollbar-thumb-hover-light: #555;
-  --scrollbar-track-light: #333;
-  --scrollbar-thumb-active-light: #666;
+  --task-progress-light: #ececef;
 }

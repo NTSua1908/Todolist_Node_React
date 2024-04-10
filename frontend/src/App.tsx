@@ -2,11 +2,13 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import "./App.css";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import React from "react";
-import { ThemeProvider } from "./hooks/ThemeContext";
+import { ThemeProvider, useTheme } from "./hooks/ThemeContext";
 
 function App() {
+  const { theme } = useTheme();
+
   return (
-    <div className='App'>
+    <div className={`App ${theme}`}>
       <ThemeProvider>
         <Router>
           <Routes>

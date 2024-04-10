@@ -1,0 +1,9 @@
+@import url("../../theme.css");
+
+.todolist {
+  height: 100vh;
+}
+
+.todolist.dark {
+  background-color: var(--background-dark);
+}

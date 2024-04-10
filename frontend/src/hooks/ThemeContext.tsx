@@ -6,8 +6,22 @@ interface Theme {
   toggleTheme: () => void;
 }
 
+const getTheme = () => {
+  const storedTheme = localStorage.getItem("theme");
+  if (
+    !storedTheme ||
+    !(
+      Object.keys(ThemeName).includes(storedTheme) &&
+      typeof ThemeName[storedTheme as keyof typeof ThemeName] !== "undefined"
+    )
+  ) {
+    return ThemeName[ThemeName.light];
+  }
+  return storedTheme;
+};
+
 const ThemeContext = createContext<Theme>({
-  theme: ThemeName[ThemeName.light],
+  theme: getTheme(),
   toggleTheme: () => {},
 });
 
@@ -16,19 +30,7 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<string>(() => {
-    const storedTheme = localStorage.getItem("theme");
-    if (
-      !storedTheme ||
-      !(
-        Object.keys(ThemeName).includes(storedTheme) &&
-        typeof ThemeName[storedTheme as keyof typeof ThemeName] !== "undefined"
-      )
-    ) {
-      return ThemeName[ThemeName.light];
-    }
-    return storedTheme;
-  });
+  const [theme, setTheme] = useState<string>(getTheme());
 
   const toggleTheme = () => {
     setTheme((prevTheme) =>

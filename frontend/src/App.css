@@ -1,38 +1,23 @@
-.App {
-  text-align: center;
+.App.dark ::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Handle */
+.App.dark ::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar handle */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Handle on hover */
+.App.dark ::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the scrollbar handle on hover */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Track */
+.App.dark ::-webkit-scrollbar-track {
+  background: #333; /* Color of the scrollbar track */
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Handle when scrollbar is dragged */
+.App.dark ::-webkit-scrollbar-thumb:active {
+  background: #666; /* Color of the scrollbar handle when active (dragged) */
 }
