@@ -6,6 +6,7 @@
   border-radius: 15px;
   margin: 20px;
   overflow: hidden;
+  padding-bottom: 10px;
 }
 
 .column.dark {

@@ -12,7 +12,6 @@ interface TaskBlockProps {
 
 const TaskBlock: React.FC<TaskBlockProps> = ({ task, index }) => {
   const { theme } = useTheme();
-  console.log("Theme: ", theme);
   return (
     <Draggable key={task.id} index={index} draggableId={task.id}>
       {(itemProvided, itemsSnapshot) => (
@@ -67,7 +66,7 @@ interface TaskProgressProps {
 
 const progressColor = {
   Level1: "#ef5353",
-  Level2: "#fca148",
+  Level2: "#f67575",
   Level3: "#fa9d47",
   Level4: "#dce627",
   Level5: "#77d501",

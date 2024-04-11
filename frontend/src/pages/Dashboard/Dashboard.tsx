@@ -9,6 +9,7 @@ import { dashboard } from "../../mock/dashboard";
 import Columns from "../../components/Columns/Columns";
 import Board from "../../components/Board/Board";
 import { useTheme } from "../../hooks/ThemeContext";
+import Header from "../../components/Header/Header";
 
 function Dashboard() {
   const [searchText, setSearchText] = useState("");
@@ -58,13 +59,14 @@ function Dashboard() {
   // console.log(tasks);
   return (
     <div className={`todolist ${theme}`}>
-      {contextHolder}
-      <div className='todolist-tasks-container'>
+      <Header />
+      <div className='todolist-container'>
         <div className='todolist-tasks'>
           <Board columns={tasks} />
         </div>
       </div>
       {loading && <Spin fullscreen size='large' />}
+      {contextHolder}
     </div>
   );
 }

@@ -1,9 +1,22 @@
 @import url("../../theme.css");
+@import url("../../variables.css");
 
 .todolist {
   height: 100vh;
+  max-height: 100vh;
 }
 
 .todolist.dark {
   background-color: var(--background-dark);
+}
+
+.todolist .todolist-container {
+  height: calc(100% - var(--header-height) - 10px);
+  max-height: calc(100% - var(--header-height) - 10px);
+  overflow-x: auto;
+}
+
+.todolist .todolist-container .todolist-tasks {
+  height: 100%;
+  max-height: 100%;
 }

@@ -1,4 +1,6 @@
 :root {
+  --main-color: #6699cc;
+
   /* Dark theme colors */
   --background-dark: #2a2b2f;
   --text-dark: #f0f0f0;
@@ -9,6 +11,7 @@
   --scrollbar-track-dark: #333;
   --scrollbar-thumb-active-dark: #666;
   --task-progress-dark: #3f4147;
+  --shadow-dark: #5b5b5b;
 
   /* Light theme colors */
   --background-light: #ffffff;
@@ -16,4 +19,5 @@
   --task-light: #ffffff;
   --column-light: #ececef;
   --task-progress-light: #ececef;
+  --shadow-light: #ccc;
 }
