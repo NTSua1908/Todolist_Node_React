@@ -1,17 +1,12 @@
 import React, { useState } from "react";
-import {
-  DragDropContext,
-  Draggable,
-  DropResult,
-  Droppable,
-} from "react-beautiful-dnd";
-import "./columns.css";
-import ColumnDashboardModel from "../../models/ColumnsModel/ColumnsDashboardModel";
-import TaskBlock from "../TaskBlock/TaskBlock";
+import { Draggable, Droppable } from "react-beautiful-dnd";
 import { IoIosAdd } from "react-icons/io";
 import { useTheme } from "../../hooks/ThemeContext";
-import AddTask from "../AddTask/AddTask";
+import ColumnDashboardModel from "../../models/ColumnsModel/ColumnsDashboardModel";
 import TaskCreateModel from "../../models/TaskModel/TaskCreateModel";
+import AddTask from "../AddTask/AddTask";
+import TaskBlock from "../TaskBlock/TaskBlock";
+import "./columns.css";
 
 interface ColumnsProps {
   column: ColumnDashboardModel;

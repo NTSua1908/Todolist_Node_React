@@ -1,24 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { IoMenu } from "react-icons/io5";
+import React, { useEffect, useRef, useState } from "react";
+import { BsThreeDots } from "react-icons/bs";
+import { IoIosNotificationsOutline, IoMdAdd } from "react-icons/io";
+import { IoCheckmarkDoneOutline, IoMenu } from "react-icons/io5";
+import { PiShareFat } from "react-icons/pi";
 import { ParseProjectsToSelectBoxOptions } from "../../helper/SelectBoxParseOption";
 import { useTheme } from "../../hooks/ThemeContext";
 import DefaultAvatar from "../../images/default_avatar.png";
 import Logo from "../../images/logo.png";
+import notificationDatas from "../../mock/notification";
 import Projects from "../../mock/projects";
 import userLogin from "../../mock/user";
-import ProjectListModel from "../../models/ProjectModel/ProjectListModel";
-import SelectBox from "../SelectBox/SelectBox";
-import { FaShare } from "react-icons/fa";
-import { IoIosNotificationsOutline } from "react-icons/io";
-import { IoMdAdd } from "react-icons/io";
-import "./header.css";
-import SearchBox from "../SearchBox/SearchBox";
-import { RiShareForwardLine } from "react-icons/ri";
-import { PiShareFat } from "react-icons/pi";
 import NotificationModel from "../../models/Notification/NoticationModel";
-import notificationDatas from "../../mock/notification";
-import { IoCheckmarkDoneOutline } from "react-icons/io5";
-import { BsThreeDots } from "react-icons/bs";
+import ProjectListModel from "../../models/ProjectModel/ProjectListModel";
+import SearchBox from "../SearchBox/SearchBox";
+import SelectBox from "../SelectBox/SelectBox";
+import "./header.css";
+import { Link } from "react-router-dom";
 
 function Header() {
   const [projects, setProjects] = useState<ProjectListModel[]>([]);
@@ -30,6 +27,7 @@ function Header() {
   useEffect(() => {
     getProjects();
     getUser();
+    getNotifications();
   }, []);
 
   const getProjects = () => {
@@ -81,6 +79,12 @@ function Header() {
               </div>
               <div className='header-notification'>
                 <IoIosNotificationsOutline />
+                <div className='header-notification-box'>
+                  <NotificationBox
+                    theme={theme}
+                    notifications={notifications}
+                  />
+                </div>
               </div>
               <div className='header-share' title='Share'>
                 <PiShareFat />
@@ -105,37 +109,110 @@ interface NotificationBoxProps {
 }
 
 //https://dribbble.com/shots/23664071-Notifications-window
-const NotificationBox: React.FC<NotificationBoxProps> = ({ notifications }) => {
+const NotificationBox: React.FC<NotificationBoxProps> = ({
+  notifications,
+  theme,
+}) => {
+  const [selectedOption, setSelectedOption] = useState("all");
+
   return (
-    <div className='notificationBox'>
+    <div className={`notificationBox ${theme}`}>
       <div className='notificationBox-header'>
-        <h3 className='notificationBox-title'>Notifications</h3>
+        <h5 className='notificationBox-title'>Notifications</h5>
         <div className='notificationBox-mark'>
-          <IoCheckmarkDoneOutline />
+          <span className='notificationBox-mark-icon'>
+            <IoCheckmarkDoneOutline />
+          </span>
           Mark all as read
         </div>
       </div>
+      <div className='notificationBox-options'>
+        <div
+          className={`notificationBox-options-button all ${
+            selectedOption === "all" && "selected"
+          }`}
+          onClick={() => {
+            setSelectedOption("all");
+          }}
+        >
+          All notificaions
+        </div>
+        <div
+          className={`notificationBox-options-button unread ${
+            selectedOption === "unread" && "selected"
+          }`}
+          onClick={() => {
+            setSelectedOption("unread");
+          }}
+        >
+          Unread
+        </div>
+        <div className='notificationBox-options-button last'></div>
+      </div>
       <div className='notificationBox-list'>
         {notifications.map((notification, index) => (
-          <div key={index} className='notification-item'>
-            <div className='notification-item-left'>
-              <img
-                src={notification.sender.avatar ?? DefaultAvatar}
-                alt={notification.sender.username}
-              />
-            </div>
-            <div className='notification-item-center'>
-              @{notification.sender.username} {notification.content}
-            </div>
-            <div className='notification-item-right'>
-              <BsThreeDots />
-              <div className='notification-item-menu'>
-                <div className='notification-item-menu-item'>Mark read</div>
-                <div className='notification-item-menu-item'>Delete</div>
-              </div>
-            </div>
-          </div>
+          <NotificationItem key={index} notification={notification} />
         ))}
+      </div>
+    </div>
+  );
+};
+
+interface NotificationItemProps {
+  notification: NotificationModel;
+}
+
+const NotificationItem: React.FC<NotificationItemProps> = ({
+  notification,
+}) => {
+  const { theme } = useTheme();
+  const [isShow, setShow] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuRef && !menuRef.current?.contains(e.target as Node))
+        setShow(false);
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  return (
+    <div className='notificationBox-item'>
+      <div className='notificationBox-item-left'>
+        <img
+          src={notification.sender.avatar ?? DefaultAvatar}
+          alt={notification.sender.username}
+        />
+      </div>
+      <div className='notificationBox-item-center'>
+        <Link to={"/user/" + notification.sender.id}>
+          @{notification.sender.username}
+        </Link>{" "}
+        {notification.content}{" "}
+        <Link to={"/project-name/" + notification.taskIndex}>
+          #{notification.taskIndex}
+        </Link>
+      </div>
+      <div className='notificationBox-item-right' ref={menuRef}>
+        <div
+          className='notificationBox-item-right-icon'
+          onClick={() => {
+            setShow((prev) => !prev);
+          }}
+        >
+          <BsThreeDots />
+        </div>
+        {isShow && (
+          <div className='notificationBox-item-menu'>
+            <div className='notificationBox-item-menu-item'>Mark read</div>
+            <div className='notificationBox-item-menu-item'>Delete</div>
+          </div>
+        )}
       </div>
     </div>
   );
