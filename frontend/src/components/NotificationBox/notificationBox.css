@@ -1,0 +1,240 @@
+.notificationBox {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 15px;
+    width: 350px;
+    cursor: auto;
+    max-height: 600px;
+    overflow: hidden;
+}
+.notificationBox.dark {
+    background-color: var(--column-dark);
+    box-shadow: 1px 1px 2px var(--shadow-dark);
+}
+.notificationBox.light {
+    background-color: var(--background-light);
+    box-shadow: 2px 2px 5px var(--shadow-light);
+}
+
+.notificationBox .notificationBox-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.notificationBox .notificationBox-title {
+    font-size: 17px;
+}
+
+.notificationBox .notificationBox-mark {
+    font-size: 12px;
+    display: flex;
+    cursor: pointer;
+}
+
+.notificationBox .notificationBox-mark .notificationBox-mark-icon {
+    padding-right: 5px;
+    font-size: 15px;
+}
+
+.notificationBox .notificationBox-options {
+    font-size: 14px;
+    display: flex;
+    margin-top: 10px;
+}
+
+.notificationBox .notificationBox-options .notificationBox-options-button {
+    padding: 10px 5px;
+    cursor: pointer;
+}
+
+.notificationBox .notificationBox-options .notificationBox-options-button.last {
+    flex: 1;
+    border-bottom: 1px solid var(--text-light);
+    cursor: auto;
+}
+
+.notificationBox.dark .notificationBox-options .notificationBox-options-button {
+    border-bottom: 1px solid var(--text-dark);
+}
+.notificationBox.light
+    .notificationBox-options
+    .notificationBox-options-button {
+    border-bottom: 1px solid var(--text-light);
+}
+
+.notificationBox .notificationBox-options .notificationBox-options-button.all {
+    padding-right: 15px;
+}
+
+.notificationBox
+    .notificationBox-options
+    .notificationBox-options-button.selected {
+    color: var(--main-color);
+    border-bottom: 2px solid var(--main-color);
+}
+
+.notificationBox .notificationBox-list {
+    padding-top: 5px;
+    overflow-y: auto;
+    height: 100%;
+    max-height: 500px;
+}
+
+.notificationBox .notificationBox-list::-webkit-scrollbar {
+    display: none;
+}
+
+.notificationBox .notificationBox-item {
+    display: flex;
+    margin: 5px 0px;
+    padding: 12px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.notificationBox.dark .notificationBox-item:hover,
+.notificationBox.dark .notificationBox-item.unread {
+    background-color: var(--task-dark);
+}
+
+.notificationBox.light .notificationBox-item:hover,
+.notificationBox.light .notificationBox-item.unread {
+    background-color: var(--column-light);
+}
+
+.notificationBox .notificationBox-item .notificationBox-item-left {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.notificationBox .notificationBox-item .notificationBox-item-left img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: contain;
+}
+
+.notificationBox .notificationBox-item .notificationBox-item-center {
+    flex: 1;
+    padding: 5px 10px 0px 0px;
+    font-size: 14px;
+}
+
+.notificationBox .notificationBox-item .notificationBox-item-center a {
+    color: var(--main-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.notificationBox .notificationBox-item .notificationBox-item-center a:hover {
+    text-decoration: underline;
+}
+
+.notificationBox .notificationBox-item .notificationBox-item-right {
+    position: relative;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    width: 30px;
+}
+
+.notificationBox
+    .notificationBox-item
+    .notificationBox-item-right
+    .notificationBox-item-menu {
+    display: none;
+    position: absolute;
+    top: 30px;
+    right: 0px;
+    width: 110px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 6px;
+    z-index: 999;
+}
+
+.notificationBox.dark
+    .notificationBox-item
+    .notificationBox-item-right
+    .notificationBox-item-menu {
+    background-color: var(--column-dark);
+    box-shadow: 1px 1px 2px var(--shadow-dark);
+}
+
+.notificationBox.light
+    .notificationBox-item
+    .notificationBox-item-right
+    .notificationBox-item-menu {
+    background-color: var(--background-light);
+    box-shadow: 2px 2px 5px var(--shadow-light);
+}
+
+.notificationBox
+    .notificationBox-item
+    .notificationBox-item-right
+    .notificationBox-item-right-icon {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+
+.notificationBox.dark
+    .notificationBox-item
+    .notificationBox-item-right
+    .notificationBox-item-right-icon {
+    background-color: var(--background-dark);
+}
+
+.notificationBox.light
+    .notificationBox-item
+    .notificationBox-item-right
+    .notificationBox-item-right-icon {
+    background-color: var(--task-light);
+}
+
+.notificationBox
+    .notificationBox-item
+    .notificationBox-item-right
+    .notificationBox-item-right-icon:hover
+    .notificationBox-item-menu {
+    display: block;
+}
+
+.notificationBox
+    .notificationBox-item:hover
+    .notificationBox-item-right
+    .notificationBox-item-right-icon {
+    display: flex;
+}
+
+.notificationBox
+    .notificationBox-item
+    .notificationBox-item-right
+    .notificationBox-item-menu
+    .notificationBox-item-menu-item {
+    padding: 6px 8px;
+    cursor: pointer;
+    border-radius: 6px;
+    margin-top: 5px;
+}
+
+.notificationBox
+    .notificationBox-item
+    .notificationBox-item-right
+    .notificationBox-item-menu
+    .notificationBox-item-menu-item:hover {
+    background-color: var(--main-color);
+}
+
+.notificationBox.notificationBox.light
+    .notificationBox-item
+    .notificationBox-item-right
+    .notificationBox-item-menu
+    .notificationBox-item-menu-item:hover {
+    color: var(--text-dark);
+}

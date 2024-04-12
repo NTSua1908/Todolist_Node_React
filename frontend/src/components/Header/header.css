@@ -2,305 +2,168 @@
 @import url("../../variables.css");
 
 .header {
-  height: var(--header-height);
-  margin-bottom: 10px;
-  border-bottom: 1px solid #ccc;
+    height: var(--header-height);
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
 }
 
 .header .header-container {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 2000px;
-  padding: 10px 30px 10px 30px;
-  margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 2000px;
+    padding: 10px 30px 10px 30px;
+    margin: 0 auto;
 }
 
 .header.light {
-  box-shadow: 0px 2px 5px #ccc;
+    box-shadow: 0px 2px 5px #ccc;
 }
 
 .header.dark {
-  background-color: var(--background-dark);
-  color: var(--text-dark);
-  box-shadow: 0px 2px 5px #5b5b5b;
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+    box-shadow: 0px 2px 5px #5b5b5b;
 }
 
 /* Header left */
 .header .header-left {
-  display: flex;
-  align-items: center;
-  height: 100%;
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 .header .header-left .header-menu {
-  font-size: 30px;
-  margin-top: 5px;
-  cursor: pointer;
+    font-size: 30px;
+    margin-top: 5px;
+    cursor: pointer;
 }
 
 .header .header-left .header-logo {
-  height: 100%;
-  margin-left: 30px;
+    height: 100%;
+    margin-left: 30px;
 }
 
 .header .header-left .header-logo img {
-  height: 100%;
-  object-fit: contain;
+    height: 100%;
+    object-fit: contain;
 }
 
 .header .header-projects {
-  margin-left: 30px;
+    margin-left: 30px;
 }
 
 /* Header right */
 .header .header-right {
-  display: flex;
-  align-items: center;
-  height: 100%;
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 .header .header-add {
-  font-size: 16px;
-  font-weight: 200;
-  border-radius: 50%;
-  height: 25px;
-  width: 25px;
-  border: 1px solid #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  margin-right: 15px;
+    font-size: 16px;
+    font-weight: 200;
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-right: 15px;
 }
 
 .header .header-notification {
-  position: relative;
-  font-size: 26px;
-  height: 30px;
-  width: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  margin-right: 15px;
+    position: relative;
+    font-size: 26px;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-right: 15px;
 }
 
 .header .header-notification .header-notification-box {
-  position: absolute;
-  top: 42px;
-  right: 0px;
+    position: absolute;
+    top: 42px;
+    right: 0px;
 }
 
 .header .header-share {
-  font-size: 25px;
-  height: 30px;
-  width: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  margin-right: 20px;
+    font-size: 25px;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-right: 20px;
 }
 
 .header .header-search {
-  margin-right: 20px;
+    margin-right: 20px;
 }
 
 .header .header-avatar {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
 
 .header .header-avatar img {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  object-fit: contain;
-  border: 1px solid #ccc;
+    position: relative;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: contain;
+    border: 1px solid #ccc;
 }
 
-/* Notification */
-
-.notificationBox {
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 15px;
-  width: 350px;
-  cursor: auto;
-}
-.notificationBox.dark {
-  background-color: var(--column-dark);
-  box-shadow: 2px 2px 5px var(--shadow-dark);
+.header .header-avatar .header-avatar-menu {
+    position: absolute;
+    top: 60px;
+    right: 22px;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    border: 1px solid #ccc;
 }
 
-.notificationBox .notificationBox-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.header.dark .header-avatar .header-avatar-menu {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+    box-shadow: 1px 1px 2px var(--shadow-dark);
+}
+.header.light .header-avatar .header-avatar-menu {
+    background-color: var(--background-light);
+    color: var(--text-light);
+    box-shadow: 2px 2px 5px var(--shadow-light);
 }
 
-.notificationBox .notificationBox-title {
-  font-size: 17px;
+.header .header-avatar .header-avatar-menu .header-avatar-item {
+    padding: 8px 14px;
+    border-radius: 6px;
+    display: flex;
 }
 
-.notificationBox .notificationBox-mark {
-  font-size: 12px;
-  display: flex;
-  cursor: pointer;
+.header.light .header-avatar .header-avatar-menu .header-avatar-item:hover {
+    background-color: var(--column-light);
+}
+.header.dark .header-avatar .header-avatar-menu .header-avatar-item:hover {
+    background-color: var(--task-dark);
 }
 
-.notificationBox .notificationBox-mark .notificationBox-mark-icon {
-  padding-right: 5px;
-  font-size: 15px;
-}
-
-.notificationBox .notificationBox-options {
-  font-size: 14px;
-  display: flex;
-  margin-top: 10px;
-}
-
-.notificationBox .notificationBox-options .notificationBox-options-button {
-  padding: 10px 5px;
-  cursor: pointer;
-}
-
-.notificationBox .notificationBox-options .notificationBox-options-button.last {
-  flex: 1;
-  border-bottom: 1px solid var(--text-light);
-  cursor: auto;
-}
-
-.notificationBox.dark .notificationBox-options .notificationBox-options-button {
-  border-bottom: 1px solid var(--text-dark);
-}
-.notificationBox.light
-  .notificationBox-options
-  .notificationBox-options-button {
-  border-bottom: 1px solid var(--text-light);
-}
-
-.notificationBox .notificationBox-options .notificationBox-options-button.all {
-  padding-right: 15px;
-}
-
-.notificationBox
-  .notificationBox-options
-  .notificationBox-options-button.selected {
-  color: var(--main-color);
-  border-bottom: 2px solid var(--main-color);
-}
-
-.notificationBox .notificationBox-list {
-  padding-top: 5px;
-}
-
-.notificationBox .notificationBox-item {
-  display: flex;
-  margin: 5px 0px;
-  padding: 12px 5px;
-  border-radius: 10px;
-}
-
-.notificationBox.dark .notificationBox-item:hover {
-  background-color: var(--background-dark);
-}
-
-.notificationBox .notificationBox-item .notificationBox-item-left {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-}
-
-.notificationBox .notificationBox-item .notificationBox-item-left img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: contain;
-}
-
-.notificationBox .notificationBox-item .notificationBox-item-center {
-  flex: 1;
-  padding: 5px 10px 0px 0px;
-  font-size: 14px;
-}
-
-.notificationBox .notificationBox-item .notificationBox-item-center a {
-  color: var(--main-color);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.notificationBox .notificationBox-item .notificationBox-item-right {
-  position: relative;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-}
-
-.notificationBox
-  .notificationBox-item
-  .notificationBox-item-right
-  .notificationBox-item-menu {
-  position: absolute;
-  top: 30px;
-  right: 0px;
-  width: 110px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  padding: 6px;
-}
-
-.notificationBox.dark
-  .notificationBox-item
-  .notificationBox-item-right
-  .notificationBox-item-menu {
-  background-color: var(--column-dark);
-  box-shadow: 2px 2px 5px var(--shadow-dark);
-  z-index: 999;
-}
-
-.notificationBox
-  .notificationBox-item
-  .notificationBox-item-right
-  .notificationBox-item-right-icon {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background-color: var(--task-dark);
-  cursor: pointer;
-}
-
-.notificationBox
-  .notificationBox-item:hover
-  .notificationBox-item-right
-  .notificationBox-item-right-icon {
-  display: flex;
-}
-
-.notificationBox
-  .notificationBox-item
-  .notificationBox-item-right
-  .notificationBox-item-menu
-  .notificationBox-item-menu-item {
-  padding: 6px 8px;
-  cursor: pointer;
-  border-radius: 6px;
-  margin-top: 5px;
-}
-
-.notificationBox
-  .notificationBox-item
-  .notificationBox-item-right
-  .notificationBox-item-menu
-  .notificationBox-item-menu-item:hover {
-  background-color: var(--main-color);
+.header
+    .header-avatar
+    .header-avatar-menu
+    .header-avatar-item
+    .header-avatar-item-icon {
+    padding-right: 10px;
+    font-size: 15px;
 }

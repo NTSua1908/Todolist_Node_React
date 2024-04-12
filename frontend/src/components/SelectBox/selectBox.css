@@ -1,88 +1,97 @@
 @import url(../../theme.css);
 
 .selectBox {
-  width: 200px;
-  height: 40px;
-  position: relative;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+    width: 200px;
+    height: 40px;
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 6px;
 }
 
 .selectBox.dark {
-  background-color: var(--background-dark);
+    background-color: var(--background-dark);
 }
 
 .selectBox .selectBox-icon {
-  position: absolute;
-  top: 12px;
-  right: 12px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
 }
 
 .selectBox .selectBox-icon svg {
-  display: block;
-  transform-origin: center;
-  transition: transform 0.2s ease-in-out;
+    display: block;
+    transform-origin: center;
+    transition: transform 0.2s ease-in-out;
 }
 
 .selectBox .selectBox-icon.open svg {
-  transform: rotate(180deg);
+    transform: rotate(180deg);
 }
 
 .selectBox .selectBox-header {
-  padding: 0 30px 0 15px;
-  font-weight: 500;
-  font-size: 15px;
-  height: 100%;
-  width: 100%;
-  cursor: pointer;
-  line-height: 40px;
+    padding: 0 30px 0 15px;
+    font-weight: 500;
+    font-size: 15px;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    line-height: 40px;
 
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .selectBox .selectBox-options {
-  position: absolute;
-  top: 45px;
-  left: 0px;
-  border-radius: 6px;
-  width: 100%;
-  border: 1px solid #ccc;
-  padding: 8px;
+    position: absolute;
+    top: 45px;
+    left: 0px;
+    border-radius: 6px;
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 8px;
+    max-height: 300px;
+    overflow-y: auto;
 }
 .selectBox.light .selectBox-options {
-  background-color: var(--background-light);
-  box-shadow: 2px 2px 5px var(--shadow-light);
+    background-color: var(--background-light);
+    box-shadow: 2px 2px 5px var(--shadow-light);
 }
 .selectBox.dark .selectBox-options {
-  background-color: var(--column-dark);
-  box-shadow: 2px 2px 5px var(--shadow-dark);
+    background-color: var(--column-dark);
+    box-shadow: 1px 1px 2px var(--shadow-dark);
+}
+.selectBox .selectBox-options::-webkit-scrollbar {
+    display: none;
 }
 
 .selectBox .selectBox-options .selectBox-options-item {
-  height: 40px;
-  line-height: 40px;
-  width: 100%;
-  font-size: 14px;
-  padding: 0 15px;
-  cursor: pointer;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  border-radius: 6px;
-  margin-bottom: 5px;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+    font-size: 14px;
+    padding: 0 15px;
+    cursor: pointer;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    border-radius: 6px;
+    margin-bottom: 5px;
+}
+
+.selectBox .selectBox-options .selectBox-options-item:last-child {
+    margin-bottom: 0px;
 }
 
 .selectBox .selectBox-options .selectBox-options-item.selected {
-  background-color: var(--main-color);
-  color: #fff;
-  font-weight: 500;
+    background-color: var(--main-color);
+    color: #fff;
+    font-weight: 500;
 }
 
 .selectBox .selectBox-options .selectBox-options-item:hover {
-  background-color: var(--main-color);
-  color: #fff;
+    background-color: var(--main-color);
+    color: #fff;
 }
