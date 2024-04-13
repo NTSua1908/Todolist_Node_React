@@ -1,0 +1,61 @@
+@import url("../../theme.css");
+
+.toggleButton {
+    position: relative;
+    width: 80px;
+    --height: 25px;
+    height: calc(2px + var(--height));
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    overflow: hidden;
+}
+.toggleButton.dark {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+}
+.toggleButton.light {
+    background-color: var(--background-light);
+    color: var(--text-light);
+}
+
+.toggleButton input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+}
+
+.toggleButton .toggleButton-slider {
+    display: flex;
+    height: 100%;
+    transition: 0.2s ease-in-out;
+}
+
+.toggleButton .toggleButton-slider-thumb {
+    height: var(--height);
+    width: var(--height);
+    min-width: var(--height);
+    border-radius: 50%;
+}
+
+.toggleButton.dark .toggleButton-slider-thumb {
+    background-color: var(--background-light);
+}
+.toggleButton.light .toggleButton-slider-thumb {
+    background-color: var(--background-light);
+    border: 1px solid #ccc;
+}
+
+.toggleButton .toggleButton-slider .toggleButton-slider-label {
+    font-size: 12px;
+    line-height: var(--height);
+    min-width: 52px;
+    text-align: center;
+}
+
+.toggleButton input:checked + .toggleButton-slider {
+    transform: translateX(-53px);
+}

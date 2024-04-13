@@ -7,7 +7,7 @@ import { PiShareFat } from "react-icons/pi";
 import { ParseProjectsToSelectBoxOptions } from "../../helper/SelectBoxParseOption";
 import { useTheme } from "../../hooks/ThemeContext";
 import DefaultAvatar from "../../images/default_avatar.png";
-import Logo from "../../images/logo.png";
+import Logo from "../../images/Logo";
 import notificationDatas from "../../mock/notification";
 import Projects from "../../mock/projects";
 import userLogin from "../../mock/user";
@@ -17,9 +17,11 @@ import NotificationBox from "../NotificationBox/NotificationBox";
 import SearchBox from "../SearchBox/SearchBox";
 import SelectBox from "../SelectBox/SelectBox";
 import "./header.css";
+import LeftMenu from "../LeftMenu/LeftMenu";
 
 function Header() {
     const [projects, setProjects] = useState<ProjectListModel[]>([]);
+    const [selectedProject, setSelectedProject] = useState<ProjectListModel>();
 
     const [user, setUser] = useState<UserGetByTokenModel>();
 
@@ -29,6 +31,7 @@ function Header() {
     >([]);
     const [isShowNotification, setShowNotification] = useState(false);
     const [isShowMenuUser, setShowMenuUser] = useState(false);
+    const [isShowLeftMenu, setShowLeftMenu] = useState(false);
 
     const { theme } = useTheme();
     const notificationRef = useRef<HTMLDivElement>(null);
@@ -67,6 +70,20 @@ function Header() {
     const getProjects = () => {
         //fetch API
         setProjects(Projects);
+        const projectSlug = localStorage.getItem("project");
+        if (projectSlug) {
+            const project = Projects.find(
+                (project) => project.slug === projectSlug
+            );
+            if (project) setSelectedProject(project);
+            else {
+                setSelectedProject(Projects[0]);
+                localStorage.setItem("project", Projects[0].slug);
+            }
+        } else {
+            setSelectedProject(Projects[0]);
+            localStorage.setItem("project", Projects[0].slug);
+        }
     };
 
     const getUser = () => {
@@ -81,7 +98,13 @@ function Header() {
         setUnreadNotifications(notificationDatas);
     };
 
-    const onChangeProject = (projectId: string) => {};
+    const onChangeProject = (projectId: string) => {
+        const project = projects.find((project) => project.id === projectId);
+        if (project) {
+            setSelectedProject(project);
+            localStorage.setItem("project", project.slug);
+        }
+    };
 
     const onSearch = (searchText: string) => {
         console.log(searchText);
@@ -91,11 +114,17 @@ function Header() {
         <div className={`header ${theme}`}>
             <div className='header-container'>
                 <div className='header-left'>
-                    <div className='header-menu'>
+                    <div
+                        className='header-menu'
+                        onClick={() => {
+                            setShowLeftMenu(true);
+                        }}
+                    >
                         <IoMenu />
                     </div>
                     <div className='header-logo'>
-                        <img src={Logo} alt='...' />
+                        {/* <img src={Logo} alt='...' /> */}
+                        <Logo />
                     </div>
                     {projects.length > 0 && (
                         <div className='header-projects'>
@@ -104,6 +133,7 @@ function Header() {
                                     projects
                                 )}
                                 onSelect={onChangeProject}
+                                selectedValue={selectedProject?.id}
                             />
                         </div>
                     )}
@@ -179,6 +209,15 @@ function Header() {
                     )}
                 </div>
             </div>
+            {selectedProject && (
+                <div className='header-menu'>
+                    <LeftMenu
+                        project={selectedProject}
+                        show={isShowLeftMenu}
+                        setShow={setShowLeftMenu}
+                    />
+                </div>
+            )}
         </div>
     );
 }
