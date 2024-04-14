@@ -19,7 +19,6 @@ function ToggleButton({
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         onChange(e.target.checked);
-        console.log(e.target.checked);
     };
 
     return (

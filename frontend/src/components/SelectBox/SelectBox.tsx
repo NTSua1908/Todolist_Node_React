@@ -5,16 +5,24 @@ import { useTheme } from "../../hooks/ThemeContext";
 
 export interface SelectBoxOption {
     name: string;
-    value: string;
+    value: any;
 }
 
 interface SelectBoxProps {
     selectedValue?: string;
     options: SelectBoxOption[];
-    onSelect: (value: string) => void;
+    onSelect: (value: any) => void;
+    width?: number;
+    small?: boolean;
 }
 
-function SelectBox({ selectedValue, options, onSelect }: SelectBoxProps) {
+function SelectBox({
+    selectedValue,
+    options,
+    onSelect,
+    width,
+    small,
+}: SelectBoxProps) {
     const [isOpen, setOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState<SelectBoxOption>(
         () => {
@@ -56,7 +64,11 @@ function SelectBox({ selectedValue, options, onSelect }: SelectBoxProps) {
     };
 
     return (
-        <div className={`selectBox ${theme}`} ref={selectBoxRef}>
+        <div
+            style={{ width: `${width}px` }}
+            className={`selectBox ${theme} ${small ? "small" : ""}`}
+            ref={selectBoxRef}
+        >
             <div
                 className={`selectBox-icon ${isOpen ? "open" : ""}`}
                 onClick={() => {

@@ -1,23 +1,20 @@
-import Dashboard from "./pages/Dashboard/Dashboard";
-import "./App.css";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import React from "react";
-import { ThemeProvider, useTheme } from "./hooks/ThemeContext";
+import "./App.css";
+import { useTheme } from "./hooks/ThemeContext";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 function App() {
-  const { theme } = useTheme();
+    const { theme } = useTheme();
 
-  return (
-    <div className={`App ${theme}`}>
-      <ThemeProvider>
-        <Router>
-          <Routes>
-            <Route path='/' element={<Dashboard />} />
-          </Routes>
-        </Router>
-      </ThemeProvider>
-    </div>
-  );
+    return (
+        <div className={`App ${theme}`}>
+            <Router>
+                <Routes>
+                    <Route path='/' element={<Dashboard />} />
+                </Routes>
+            </Router>
+        </div>
+    );
 }
 
 export default App;

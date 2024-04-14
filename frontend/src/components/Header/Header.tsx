@@ -6,18 +6,19 @@ import { IoMenu } from "react-icons/io5";
 import { PiShareFat } from "react-icons/pi";
 import { ParseProjectsToSelectBoxOptions } from "../../helper/SelectBoxParseOption";
 import { useTheme } from "../../hooks/ThemeContext";
-import DefaultAvatar from "../../images/default_avatar.png";
 import Logo from "../../images/Logo";
+import DefaultAvatar from "../../images/default_avatar.png";
 import notificationDatas from "../../mock/notification";
 import Projects from "../../mock/projects";
-import userLogin from "../../mock/user";
+import { userLogin } from "../../mock/user";
 import NotificationModel from "../../models/Notification/NoticationModel";
 import ProjectListModel from "../../models/ProjectModel/ProjectListModel";
+import LeftMenu from "../LeftMenu/LeftMenu";
 import NotificationBox from "../NotificationBox/NotificationBox";
 import SearchBox from "../SearchBox/SearchBox";
 import SelectBox from "../SelectBox/SelectBox";
+import ShareModal from "../ShareModal/ShareModal";
 import "./header.css";
-import LeftMenu from "../LeftMenu/LeftMenu";
 
 function Header() {
     const [projects, setProjects] = useState<ProjectListModel[]>([]);
@@ -32,6 +33,7 @@ function Header() {
     const [isShowNotification, setShowNotification] = useState(false);
     const [isShowMenuUser, setShowMenuUser] = useState(false);
     const [isShowLeftMenu, setShowLeftMenu] = useState(false);
+    const [isShowShare, setShowShare] = useState(false);
 
     const { theme } = useTheme();
     const notificationRef = useRef<HTMLDivElement>(null);
@@ -170,8 +172,16 @@ function Header() {
                                     </div>
                                 )}
                             </div>
-                            <div className='header-share' title='Share'>
-                                <PiShareFat />
+                            <div className='header-share'>
+                                <PiShareFat
+                                    onClick={() => {
+                                        setShowShare(true);
+                                    }}
+                                    title='Share'
+                                />
+                                {isShowShare && (
+                                    <ShareModal setShowModal={setShowShare} />
+                                )}
                             </div>
 
                             <div className='header-avatar' ref={userRef}>
