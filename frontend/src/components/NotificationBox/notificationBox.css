@@ -56,6 +56,7 @@
 
 .notificationBox.dark .notificationBox-options .notificationBox-options-button {
     border-bottom: 1px solid var(--text-dark);
+    font-weight: 600;
 }
 .notificationBox.light
     .notificationBox-options

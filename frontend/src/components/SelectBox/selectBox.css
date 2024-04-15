@@ -23,7 +23,7 @@
     right: 12px;
 }
 .selectBox.small .selectBox-icon {
-    top: 7px;
+    top: 8px;
     right: 8px;
 }
 
@@ -32,6 +32,9 @@
     transform-origin: center;
     transition: transform 0.2s ease-in-out;
     font-size: 17px;
+}
+.selectBox .selectBox-icon svg {
+    font-size: 14px;
 }
 
 .selectBox .selectBox-icon.open svg {
@@ -68,10 +71,12 @@
     max-height: 300px;
     overflow-y: auto;
     overflow: visible;
+    z-index: 99;
 }
 .selectBox.light .selectBox-options {
     background-color: var(--background-light);
     box-shadow: 2px 2px 5px var(--shadow-light);
+    z-index: 99;
 }
 .selectBox.dark .selectBox-options {
     background-color: var(--column-dark);

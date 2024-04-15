@@ -7,6 +7,7 @@
     display: block;
     font-size: 13px;
     text-align: left;
+    z-index: 1;
 }
 
 .autoComplete .autoComplete-search {
@@ -16,6 +17,15 @@
     border-radius: 6px;
     padding: 0px 10px;
     width: 100%;
+}
+.autoComplete.light .autoComplete-search {
+    background-color: var(--background-light);
+    color: var(--text-light);
+}
+
+.autoComplete.dark .autoComplete-search {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
 }
 
 .autoComplete .autoComplete-list {

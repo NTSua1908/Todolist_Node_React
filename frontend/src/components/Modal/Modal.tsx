@@ -1,56 +1,89 @@
 import React, { useState } from "react";
 import "./modal.css";
+import { useTheme } from "../../hooks/ThemeContext";
+import { TbAlertTriangleFilled } from "react-icons/tb";
+import { BsFillQuestionCircleFill } from "react-icons/bs";
 
 interface ModalProps {
-  title: string;
-  id: string;
-  setShow: React.Dispatch<React.SetStateAction<boolean>>;
-  onAccept: (id: string) => Promise<void>;
+    description: string;
+    show?: boolean;
+    setShow: React.Dispatch<React.SetStateAction<boolean>>;
+    onAccept: () => void;
+    type?: ModalType;
 }
 
-const Modal: React.FC<ModalProps> = ({ title, onAccept, setShow, id }) => {
-  const [loading, setLoading] = useState(false);
+export enum ModalType {
+    Alert = 0,
+    Question = 1,
+}
 
-  const handleCancel = () => {
-    setShow(false);
-  };
+const Modal: React.FC<ModalProps> = ({
+    description,
+    onAccept,
+    show = true,
+    setShow,
+    type = ModalType.Question,
+}) => {
+    const { theme } = useTheme();
 
-  const handleAccept = async () => {
-    if (!loading) {
-      setLoading(true);
-      await onAccept(id);
-      setLoading(false);
-    }
-  };
+    const handleCancel = () => {
+        setShow(false);
+    };
 
-  return (
-    <div className='modal'>
-      <div className='modal-background' onClick={() => handleCancel()}></div>
-      <div className='modal-container'>
-        <div className='modal-content'>
-          <p>{title}</p>
+    const handleAccept = () => {
+        setShow(false);
+        onAccept();
+    };
+
+    return (
+        <div className={`modal ${theme} ${show ? "" : "hide"}`}>
+            <div
+                className='modal-background'
+                onClick={() => handleCancel()}
+            ></div>
+            <div className='modal-container'>
+                <div className='modal-content'>
+                    <div className='modal-content-icon'>
+                        {type === ModalType.Alert && (
+                            <TbAlertTriangleFilled
+                                style={{ color: "#ff5252" }}
+                            />
+                        )}
+                        {!type ||
+                            (type === ModalType.Question && (
+                                <BsFillQuestionCircleFill
+                                    style={{ color: "3890ee" }}
+                                />
+                            ))}
+                    </div>
+                    <div className='modal-content-title'>
+                        <p className='modal-content-title-header'>
+                            {ModalType[type ?? ModalType.Question]}
+                        </p>
+                        <p className='modal-content-title-description'>
+                            {description}
+                        </p>
+                    </div>
+                </div>
+                <div className='modal-function'>
+                    <div
+                        className='modal-function-button cancel'
+                        onClick={() => {
+                            handleCancel();
+                        }}
+                    >
+                        Cancel
+                    </div>
+                    <div
+                        className='modal-function-button accept'
+                        onClick={handleAccept}
+                    >
+                        Accept
+                    </div>
+                </div>
+            </div>
         </div>
-        <div className='modal-function'>
-          <div
-            className='modal-function-button cancel'
-            onClick={() => {
-              handleCancel();
-            }}
-          >
-            Cancel
-          </div>
-          <div
-            className='modal-function-button accept'
-            onClick={() => {
-              handleAccept();
-            }}
-          >
-            Accept
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Modal;

@@ -7,6 +7,7 @@ interface AutoCompleteProps {
     onSearch: (data: string) => void;
     dataSource: AutoCompleteItem[];
     onSelect: (data: AutoCompleteItem) => void;
+    selectedItem?: AutoCompleteItem;
 }
 
 export interface AutoCompleteItem {
@@ -14,7 +15,12 @@ export interface AutoCompleteItem {
     value: any;
 }
 
-function AutoComplete({ dataSource, onSearch, onSelect }: AutoCompleteProps) {
+function AutoComplete({
+    dataSource,
+    onSearch,
+    onSelect,
+    selectedItem,
+}: AutoCompleteProps) {
     const { theme } = useTheme();
     const [searchText, setSearchText] = useState<string>();
     const [loading, setLoading] = useState(false);
@@ -39,6 +45,10 @@ function AutoComplete({ dataSource, onSearch, onSelect }: AutoCompleteProps) {
     }, [searchText]);
 
     useEffect(() => {
+        if (inputRef.current && selectedItem) {
+            inputRef.current.value = selectedItem.label;
+        }
+
         const handleClickOutsite = (e: MouseEvent) => {
             if (
                 componentRef.current &&

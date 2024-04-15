@@ -9,7 +9,7 @@ export interface SelectBoxOption {
 }
 
 interface SelectBoxProps {
-    selectedValue?: string;
+    selectedValue?: any;
     options: SelectBoxOption[];
     onSelect: (value: any) => void;
     width?: number;

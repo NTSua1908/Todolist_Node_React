@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { userSelects } from "../../mock/user";
 import AutoComplete, { AutoCompleteItem } from "../AutoComplete/AutoComplete";
-import { IoIosCloseCircle } from "react-icons/io";
+import { IoIosCloseCircle, IoMdAdd } from "react-icons/io";
 import "./shareModal.css";
 import SelectBox, { SelectBoxOption } from "../SelectBox/SelectBox";
 import ProjectRole from "../../enums/ProjectRole";
 import ProjectShareModel from "../../models/ProjectModel/ProjectShareModel";
 import { FaCheck } from "react-icons/fa";
 import { MdDelete, MdEdit, MdSave } from "react-icons/md";
+import { MdClose } from "react-icons/md";
+import { useTheme } from "../../hooks/ThemeContext";
+import Modal, { ModalType } from "../Modal/Modal";
+import Loading from "../Loading/Loading";
 
 interface ShareModalProps {
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -36,16 +40,41 @@ const projectRoles: SelectBoxOption[] = [
 ];
 
 function ShareModal({ setShowModal }: ShareModalProps) {
+    const { theme } = useTheme();
     const [users, setUsers] = useState<AutoCompleteItem[]>([]);
-
     const [editIndex, setEditIndex] = useState<number>(-1);
     const [userShared, setUserShared] = useState<UserSharedItem[]>([]);
     const [isAddingUser, setAddingUser] = useState(false);
+    const [isEditingUser, setEditingUser] = useState(false);
     const [newUser, setNewUser] = useState<UserSharedItem>({
         id: "",
         username: "",
         role: ProjectRole.Viewer,
     });
+
+    const [deleteIndex, setDeleteIndex] = useState(-1);
+    const [isShowDialog, setShowDialog] = useState(false);
+
+    const [loading, setLoading] = useState(false);
+
+    const handleCloseModal = () => {
+        if (userShared.length === 0) setShowModal(false);
+        else {
+            setShowDialog(true);
+        }
+    };
+
+    const onRemoveUser = (index: number) => {
+        setDeleteIndex(index);
+        setShowDialog(true);
+    };
+
+    const handleRemoveUsers = (index: number) => {
+        setUserShared((users) =>
+            users.filter((user, listIndex) => listIndex !== index)
+        );
+        setDeleteIndex(-1);
+    };
 
     const onSearch = async (data: string) => {
         console.log("search");
@@ -84,17 +113,60 @@ function ShareModal({ setShowModal }: ShareModalProps) {
         setAddingUser(false);
     };
 
+    const handleCancelAddUser = () => {
+        setAddingUser(false);
+        setNewUser({
+            id: "",
+            username: "",
+            role: newUser.role,
+        });
+    };
+
+    const onEditUser = (index: number, userShared: UserSharedItem) => {
+        setEditIndex(index);
+        setNewUser(userShared);
+        setEditingUser(true);
+    };
+
+    const handleCancelEdit = () => {
+        setEditIndex(-1);
+        setEditingUser(false);
+        setNewUser({
+            id: "",
+            username: "",
+            role: newUser.role,
+        });
+    };
+
+    const handleEditUser = () => {
+        userShared[editIndex] = { ...newUser };
+        setUserShared(userShared);
+        setNewUser({
+            id: "",
+            username: "",
+            role: newUser.role,
+        });
+        setEditIndex(-1);
+        setEditingUser(false);
+    };
+
+    const handleShare = async () => {
+        const userShares = userShared.map<ProjectShareModel>((user) => ({
+            id: user.id,
+            role: user.role,
+        }));
+        console.log(userShares);
+        setLoading(true);
+        await new Promise((r) => setTimeout(r, 2000));
+        setLoading(false);
+        setShowModal(false);
+    };
+
     return (
-        <div className='shareModal'>
+        <div className={`shareModal ${theme}`}>
             <div className='shareModal-container'>
-                <div className='shareModal-title'>Add members to project</div>
-                <div
-                    className='shareModal-close'
-                    onClick={() => {
-                        setShowModal(false);
-                    }}
-                >
-                    <IoIosCloseCircle />
+                <div className='shareModal-title'>
+                    Add members to the project
                 </div>
 
                 <div className='shareModal-list'>
@@ -127,11 +199,17 @@ function ShareModal({ setShowModal }: ShareModalProps) {
                                     {index === editIndex ? (
                                         <>
                                             <td>
-                                                <AutoComplete
-                                                    onSearch={onSearch}
-                                                    dataSource={users}
-                                                    onSelect={onSelect}
-                                                />
+                                                <div>
+                                                    <AutoComplete
+                                                        onSearch={onSearch}
+                                                        dataSource={users}
+                                                        onSelect={onSelect}
+                                                        selectedItem={{
+                                                            label: user.username,
+                                                            value: user.id,
+                                                        }}
+                                                    />
+                                                </div>
                                             </td>
                                             <td>
                                                 <div>
@@ -142,52 +220,86 @@ function ShareModal({ setShowModal }: ShareModalProps) {
                                                         }
                                                         width={100}
                                                         small
+                                                        selectedValue={
+                                                            user.role
+                                                        }
                                                     />
                                                 </div>
                                             </td>
                                             <td className='shareModal-table-actions'>
-                                                <div className='shareModal-table-function save'>
+                                                <button
+                                                    className='shareModal-table-function save'
+                                                    onClick={handleEditUser}
+                                                >
                                                     <MdSave title='Save' />
-                                                </div>
-                                                <div className='shareModal-table-function delete'>
-                                                    <MdDelete title='Delete' />
-                                                </div>
+                                                </button>
+                                                <button
+                                                    className='shareModal-table-function delete'
+                                                    onClick={handleCancelEdit}
+                                                >
+                                                    <MdClose title='Cancel' />
+                                                </button>
                                             </td>
                                         </>
                                     ) : (
                                         <>
-                                            <td>{user.username}</td>
+                                            <td>
+                                                <span>{user.username}</span>
+                                            </td>
                                             <td>{ProjectRole[user.role]}</td>
                                             <td className='shareModal-table-actions'>
-                                                <div
-                                                    className='shareModal-table-function edit'
-                                                    onClick={() =>
-                                                        setEditIndex(index)
+                                                <button
+                                                    disabled={
+                                                        isEditingUser ||
+                                                        isAddingUser
                                                     }
+                                                    className='shareModal-table-function edit'
+                                                    onClick={() => {
+                                                        onEditUser(index, user);
+                                                    }}
                                                 >
                                                     <MdEdit />
-                                                </div>
-                                                <div className='shareModal-table-function delete'>
+                                                </button>
+                                                <button
+                                                    className='shareModal-table-function delete'
+                                                    disabled={
+                                                        isEditingUser ||
+                                                        isAddingUser
+                                                    }
+                                                    onClick={() => {
+                                                        onRemoveUser(index);
+                                                    }}
+                                                >
                                                     <MdDelete title='Delete' />
-                                                </div>
+                                                </button>
+
+                                                {deleteIndex === index &&
+                                                    isShowDialog && (
+                                                        <Modal
+                                                            type={
+                                                                ModalType.Alert
+                                                            }
+                                                            description='Do you want to remove this user ?'
+                                                            setShow={
+                                                                setShowDialog
+                                                            }
+                                                            show={isShowDialog}
+                                                            onAccept={() => {
+                                                                handleRemoveUsers(
+                                                                    index
+                                                                );
+                                                                setDeleteIndex(
+                                                                    -1
+                                                                );
+                                                            }}
+                                                        />
+                                                    )}
                                             </td>
                                         </>
                                     )}
                                 </tr>
                             ))}
-                            {!isAddingUser && (
-                                <tr>
-                                    <td
-                                        colSpan={4}
-                                        className='shareModal-add'
-                                        onClick={() => {
-                                            setAddingUser(true);
-                                        }}
-                                    >
-                                        Add users
-                                    </td>
-                                </tr>
-                            )}
+
                             {isAddingUser && (
                                 <tr>
                                     <>
@@ -208,6 +320,7 @@ function ShareModal({ setShowModal }: ShareModalProps) {
                                                     onSelect={handleSelectRole}
                                                     width={100}
                                                     small
+                                                    selectedValue={newUser.role}
                                                 />
                                             </div>
                                         </td>
@@ -222,17 +335,65 @@ function ShareModal({ setShowModal }: ShareModalProps) {
                                             >
                                                 <MdSave title='Save' />
                                             </button>
-                                            <button className='shareModal-table-function delete'>
-                                                <MdDelete title='Delete' />
+                                            <button
+                                                className='shareModal-table-function delete'
+                                                onClick={handleCancelAddUser}
+                                            >
+                                                <MdClose title='Delete' />
                                             </button>
                                         </td>
                                     </>
                                 </tr>
                             )}
+                            <tr>
+                                <td colSpan={4}>
+                                    {(!isAddingUser ||
+                                        userShared.length !== 0) && (
+                                        <div className='shareModal-add'>
+                                            {!isAddingUser &&
+                                                !isEditingUser && (
+                                                    <div
+                                                        className='shareModal-add-container'
+                                                        onClick={() => {
+                                                            setAddingUser(true);
+                                                        }}
+                                                    >
+                                                        <span className='shareModal-add-icon'>
+                                                            <IoMdAdd />
+                                                        </span>
+                                                        Add more
+                                                    </div>
+                                                )}
+                                        </div>
+                                    )}
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
+                <div className='shareModal-function'>
+                    <button
+                        className='shareModal-function-button cancel'
+                        onClick={handleCloseModal}
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        className='shareModal-function-button share'
+                        disabled={userShared.length === 0}
+                        onClick={handleShare}
+                    >
+                        Share
+                    </button>
+                </div>
             </div>
+            <Modal
+                description='Do you want to cancel this sharing?'
+                show={isShowDialog && deleteIndex === -1}
+                setShow={setShowDialog}
+                onAccept={() => setShowModal(false)}
+            />
+            {loading && <Loading fullScreen />}
         </div>
     );
 }
