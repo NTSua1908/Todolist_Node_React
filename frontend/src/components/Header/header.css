@@ -5,6 +5,9 @@
     height: var(--header-height);
     margin-bottom: 10px;
     border-bottom: 1px solid #ccc;
+    position: sticky;
+    top: 0px;
+    z-index: 100;
 }
 
 .header .header-container {
@@ -20,6 +23,7 @@
 
 .header.light {
     box-shadow: 0px 2px 5px #ccc;
+    background-color: var(--background-light);
 }
 
 .header.dark {

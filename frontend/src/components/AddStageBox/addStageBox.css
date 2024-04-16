@@ -1,0 +1,97 @@
+@import url("../../theme.css");
+
+.addStage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.addStage .addStage-container {
+    position: relative;
+    width: 300px;
+    border-radius: 15px;
+    padding: 25px 20px;
+    border: 1px solid #ccc;
+}
+.addStage.light .addStage-container {
+    background-color: var(--background-light);
+    color: var(--text-light);
+    box-shadow: 2px 2px 5px var(--shadow-light);
+}
+.addStage.dark .addStage-container {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+    box-shadow: 1px 1px 3px var(--shadow-dark);
+}
+
+.addStage .addStage-title {
+    text-align: center;
+    font-size: 20px;
+    /* color: var(--main-color); */
+    font-weight: 600;
+    padding: 0px 0px 10px 0px;
+}
+
+.addStage .addStage-content {
+    padding: 10px 0px;
+}
+
+.addStage .addStage-content .addStage-content-label {
+    font-size: 14px;
+    padding-bottom: 12px;
+    padding-left: 6px;
+    font-weight: 500;
+}
+
+.addStage.light .addStage-content .ant-input {
+    background-color: var(--background-light);
+    color: var(--text-light);
+}
+.addStage.dark .addStage-content .ant-input {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+}
+
+.addStage .addStage-function {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 15px;
+}
+
+.addStage .addStage-function .addStage-function-button {
+    display: block;
+    padding: 6px 20px;
+    border-radius: 15px;
+    outline: none;
+    cursor: pointer;
+    width: 80px;
+}
+.addStage .addStage-function .addStage-function-button:disabled {
+    cursor: not-allowed;
+}
+
+.addStage .addStage-function .addStage-function-button.add {
+    border: none;
+    background-color: var(--button-color);
+    color: var(--text-dark);
+}
+
+.addStage.light .addStage-function .addStage-function-button.cancel {
+    border: 1px solid var(--text-light);
+    background-color: var(--background-light);
+    color: var(--text-light);
+}
+.addStage.dark .addStage-function .addStage-function-button.cancel {
+    border: 1px solid var(--text-dark);
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+}

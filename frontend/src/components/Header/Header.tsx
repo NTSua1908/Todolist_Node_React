@@ -19,6 +19,10 @@ import SearchBox from "../SearchBox/SearchBox";
 import SelectBox from "../SelectBox/SelectBox";
 import ShareModal from "../ShareModal/ShareModal";
 import "./header.css";
+import AddStageBox from "../AddStageBox/AddStageBox";
+import Loading from "../Loading/Loading";
+import { useProject } from "../../hooks/ProjectContext";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
     const [projects, setProjects] = useState<ProjectListModel[]>([]);
@@ -34,10 +38,16 @@ function Header() {
     const [isShowMenuUser, setShowMenuUser] = useState(false);
     const [isShowLeftMenu, setShowLeftMenu] = useState(false);
     const [isShowShare, setShowShare] = useState(false);
+    const [isShowAddStage, setShowAddStage] = useState(false);
+    const [isLoading, setLoading] = useState(false);
 
     const { theme } = useTheme();
+    const { slug, setSlug } = useProject();
+
     const notificationRef = useRef<HTMLDivElement>(null);
     const userRef = useRef<HTMLDivElement>(null);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         //get data
@@ -72,11 +82,8 @@ function Header() {
     const getProjects = () => {
         //fetch API
         setProjects(Projects);
-        const projectSlug = localStorage.getItem("project");
-        if (projectSlug) {
-            const project = Projects.find(
-                (project) => project.slug === projectSlug
-            );
+        if (slug) {
+            const project = Projects.find((project) => project.slug === slug);
             if (project) setSelectedProject(project);
             else {
                 setSelectedProject(Projects[0]);
@@ -104,12 +111,19 @@ function Header() {
         const project = projects.find((project) => project.id === projectId);
         if (project) {
             setSelectedProject(project);
-            localStorage.setItem("project", project.slug);
+            setSlug(project.slug);
+            navigate("/project/" + project?.slug);
         }
     };
 
     const onSearch = (searchText: string) => {
         console.log(searchText);
+    };
+
+    const handleAddStage = async (name: string) => {
+        setLoading(true);
+        await new Promise((r) => setTimeout(r, 2000));
+        setLoading(false);
     };
 
     return (
@@ -149,8 +163,19 @@ function Header() {
                     </div>
                     {user && (
                         <>
-                            <div className='header-add' title='Add new stage'>
-                                <IoMdAdd />
+                            <div className='header-add'>
+                                <IoMdAdd
+                                    title='Add new stage'
+                                    onClick={() => {
+                                        setShowAddStage(true);
+                                    }}
+                                />
+                                {isShowAddStage && (
+                                    <AddStageBox
+                                        onAdd={handleAddStage}
+                                        setShowBox={setShowAddStage}
+                                    />
+                                )}
                             </div>
                             <div
                                 className='header-notification'
@@ -228,6 +253,7 @@ function Header() {
                     />
                 </div>
             )}
+            {isLoading && <Loading fullScreen />}
         </div>
     );
 }

@@ -258,7 +258,7 @@ function ShareModal({ setShowModal }: ShareModalProps) {
                                                         onEditUser(index, user);
                                                     }}
                                                 >
-                                                    <MdEdit />
+                                                    <MdEdit title='Edit' />
                                                 </button>
                                                 <button
                                                     className='shareModal-table-function delete'

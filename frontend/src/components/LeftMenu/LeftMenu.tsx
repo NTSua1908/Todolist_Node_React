@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./leftMenu.css";
-import { MdClose } from "react-icons/md";
+import { MdClose, MdDashboard } from "react-icons/md";
 import Logo from "../../images/Logo";
 import { userLogin } from "../../mock/user";
 import { FaAngleLeft, FaSignOutAlt } from "react-icons/fa";
@@ -14,7 +14,8 @@ import { IoSunnyOutline } from "react-icons/io5";
 import ToggleButton from "../ToggleButton/ToggleButton";
 import ProjectListModel from "../../models/ProjectModel/ProjectListModel";
 import { IoMdSunny } from "react-icons/io";
-import { useFetcher } from "react-router-dom";
+import { Link, useFetcher } from "react-router-dom";
+import { useProject } from "../../hooks/ProjectContext";
 
 interface LeftMenuProps {
     project: ProjectListModel;
@@ -24,15 +25,12 @@ interface LeftMenuProps {
 
 function LeftMenu({ project, show, setShow }: LeftMenuProps) {
     const { theme, toggleTheme } = useTheme();
+    const { slug } = useProject();
     const menuRef = useRef<HTMLDivElement>(null);
 
     const handleChangeTheme = (isCheck: boolean) => {
         toggleTheme();
     };
-
-    useEffect(() => {
-        localStorage.setItem("theme", theme);
-    }, [theme]);
 
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
@@ -70,24 +68,39 @@ function LeftMenu({ project, show, setShow }: LeftMenuProps) {
             </div>
             <div className='leftMenu-content'>
                 <div className='leftMenu-top'>
-                    <div className='leftMenu-item'>
+                    <Link to={`/project/${slug}/`} className='leftMenu-item'>
+                        <span className='leftMenu-item-icon'>
+                            <MdDashboard />
+                        </span>
+                        DashBoard
+                    </Link>
+                    <Link
+                        to={`/project/${slug}/members`}
+                        className='leftMenu-item'
+                    >
                         <span className='leftMenu-item-icon'>
                             <FaUsers />
                         </span>
                         Members
-                    </div>
-                    <div className='leftMenu-item'>
+                    </Link>
+                    <Link
+                        to={`/project/${slug}/stages`}
+                        className='leftMenu-item'
+                    >
                         <span className='leftMenu-item-icon'>
                             <TfiLayoutColumn3Alt />
                         </span>
                         Stages
-                    </div>
-                    <div className='leftMenu-item'>
+                    </Link>
+                    <Link
+                        to={`/project/${slug}/labels`}
+                        className='leftMenu-item'
+                    >
                         <span className='leftMenu-item-icon'>
                             <MdLabelImportant />
                         </span>
                         Labels
-                    </div>
+                    </Link>
                 </div>
                 <div className='leftMenu-bottom'>
                     <div className='leftMenu-item'>
@@ -113,6 +126,7 @@ function LeftMenu({ project, show, setShow }: LeftMenuProps) {
                             labelOn='Light'
                             lableOff='Dark'
                             onChange={handleChangeTheme}
+                            isChecked={theme === "light"}
                         />
                     </div>
                 </div>

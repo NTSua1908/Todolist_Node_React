@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { IoIosAdd } from "react-icons/io";
 import { useTheme } from "../../hooks/ThemeContext";
-import ColumnDashboardModel from "../../models/ColumnsModel/ColumnsDashboardModel";
+import ColumnDashboardModel from "../../models/StageModel/StageDashboardModel";
 import TaskCreateModel from "../../models/TaskModel/TaskCreateModel";
 import AddTask from "../AddTask/AddTask";
 import TaskBlock from "../TaskBlock/TaskBlock";

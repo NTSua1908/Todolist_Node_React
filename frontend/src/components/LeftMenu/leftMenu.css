@@ -27,7 +27,7 @@
 
 .leftMenu .leftMenu-header {
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
     border-radius: 10px;
 }
 .leftMenu.dark .leftMenu-header {
@@ -97,7 +97,15 @@
     align-items: center;
     cursor: pointer;
     margin-top: 5px;
+    text-decoration: none;
 }
+.leftMenu.light .leftMenu-item {
+    color: var(--text-light);
+}
+.leftMenu.dark .leftMenu-item {
+    color: var(--text-dark);
+}
+
 .leftMenu .leftMenu-item:hover {
     background-color: var(--main-color);
     color: var(--text-dark);
@@ -119,7 +127,6 @@
     border-radius: 6px;
     display: flex;
     align-items: center;
-    cursor: pointer;
 }
 
 .leftMenu .leftMenu-theme .leftMenu-theme-label {
