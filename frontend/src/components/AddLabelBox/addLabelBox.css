@@ -1,0 +1,96 @@
+@import url("../../theme.css");
+
+.addLabel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.addLabel .addLabel-container {
+    position: relative;
+    width: 300px;
+    border-radius: 15px;
+    padding: 25px 20px;
+    border: 1px solid #ccc;
+}
+.addLabel.light .addLabel-container {
+    background-color: var(--background-light);
+    color: var(--text-light);
+    box-shadow: 2px 2px 5px var(--shadow-light);
+}
+.addLabel.dark .addLabel-container {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+    box-shadow: 1px 1px 3px var(--shadow-dark);
+}
+
+.addLabel .addLabel-title {
+    text-align: center;
+    font-size: 20px;
+    /* color: var(--main-color); */
+    font-weight: 600;
+    padding: 0px 0px 5px 0px;
+}
+
+.addLabel .addLabel-content {
+    padding: 10px 0px;
+}
+
+.addLabel .addLabel-content .addLabel-content-label {
+    font-size: 14px;
+    padding: 5px 0px 12px 6px;
+    font-weight: 500;
+}
+
+.addLabel.light .addLabel-content .ant-input {
+    background-color: var(--background-light);
+    color: var(--text-light);
+}
+.addLabel.dark .addLabel-content .ant-input {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+}
+
+.addLabel .addLabel-function {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 15px;
+}
+
+.addLabel .addLabel-function .addLabel-function-button {
+    display: block;
+    padding: 6px 20px;
+    border-radius: 15px;
+    outline: none;
+    cursor: pointer;
+    width: 80px;
+}
+.addLabel .addLabel-function .addLabel-function-button:disabled {
+    cursor: not-allowed;
+}
+
+.addLabel .addLabel-function .addLabel-function-button.add {
+    border: none;
+    background-color: var(--button-color);
+    color: var(--text-dark);
+}
+
+.addLabel.light .addLabel-function .addLabel-function-button.cancel {
+    border: 1px solid var(--text-light);
+    background-color: var(--background-light);
+    color: var(--text-light);
+}
+.addLabel.dark .addLabel-function .addLabel-function-button.cancel {
+    border: 1px solid var(--text-dark);
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+}

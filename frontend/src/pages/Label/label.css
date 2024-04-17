@@ -1,20 +1,20 @@
 @import url("../../theme.css");
 @import url("../../variables.css");
 
-.stage {
+.label {
     height: 100vh;
 }
 
-.stage.light {
+.label.light {
     background-color: var(--background-light);
     color: var(--text-light);
 }
-.stage.dark {
+.label.dark {
     background-color: var(--background-dark);
     color: var(--text-dark);
 }
 
-.stage .stage-container {
+.label .label-container {
     position: relative;
     top: -10px;
     padding: 40px 40px 20px 40px;
@@ -22,25 +22,25 @@
     margin: 0 auto;
     height: calc(100% - var(--header-height));
 }
-.stage.light .stage-container {
+.label.light .label-container {
     box-shadow: 0px 0px 2px var(--shadow-light);
 }
-.stage.dark .stage-container {
+.label.dark .label-container {
     box-shadow: 2px 2px 5px var(--shadow-dark);
 }
 
-.stage .stage-header {
+.label .label-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.stage .stage-header .stage-header-title {
+.label .label-header .label-header-title {
     font-size: 30px;
     font-weight: 600;
 }
 
-.stage .stage-header .stage-header-button button {
+.label .label-header .label-header-button button {
     padding: 5px 10px;
     border-radius: 6px;
     outline: none;
@@ -54,14 +54,14 @@
     cursor: pointer;
 }
 
-.stage .stage-header .stage-header-button .stage-header-button-icon {
+.label .label-header .label-header-button .label-header-button-icon {
     font-size: 20px;
     padding-right: 5px;
     display: flex;
     align-items: center;
 }
 
-.stage .stage-table {
+.label .label-table {
     width: 800px;
     border-radius: 6px;
     overflow: hidden;
@@ -70,29 +70,29 @@
     margin-top: 50px;
 }
 
-.stage .stage-table table {
+.label .label-table table {
     border-collapse: collapse;
     width: 100%;
 }
 
-.stage .stage-table table tr td {
+.label .label-table table tr td {
     padding: 6px 25px;
     text-align: center;
 }
 
-.stage .stage-table table th {
+.label .label-table table th {
     background-color: var(--main-color);
     color: var(--text-dark);
     padding: 15px 25px;
 }
 
-.stage .stage-table .stage-table-actions {
+.label .label-table .label-table-actions {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.stage .stage-table .stage-table-actions .stage-table-function {
+.label .label-table .label-table-actions .label-table-function {
     width: 30px;
     height: 30px;
     margin: 5px;
@@ -106,25 +106,35 @@
     background-color: transparent;
 }
 
-.stage .stage-table .stage-table-actions .stage-table-function.delete {
+.label .label-table .label-table-actions .label-table-function.delete {
     color: red;
     border: 2px solid red;
 }
 
-.stage .stage-table .stage-table-actions .stage-table-function.edit {
+.label .label-table .label-table-actions .label-table-function.edit {
     border: 2px solid rgb(239, 155, 0);
     color: rgb(239, 155, 0);
 }
 
-.stage.light .stage-table tr:nth-child(even) {
+.label.light .label-table tr:nth-child(even) {
     background-color: #f8f6ff;
 }
-.stage.dark .stage-table tr:nth-child(even) {
+.label.dark .label-table tr:nth-child(even) {
     background-color: var(--task-dark);
 }
 
-.stage .stage-table .stage-table-percent {
+.label .label-table .label-table-percent {
     height: 40px;
     display: flex;
     justify-content: center;
+}
+
+.label .label-table .label-table-name {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #f0f0f0;
 }

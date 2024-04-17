@@ -1,0 +1,149 @@
+@import url("../../theme.css");
+
+.member {
+    height: 100vh;
+}
+
+.member.light {
+    background-color: var(--background-light);
+    color: var(--text-light);
+}
+.member.dark {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+}
+
+.member .member-container {
+    position: relative;
+    top: -10px;
+    padding: 40px 40px 20px 40px;
+    width: 1200px;
+    margin: 0 auto;
+    height: calc(100% - var(--header-height));
+}
+.member.light .member-container {
+    box-shadow: 0px 0px 2px var(--shadow-light);
+}
+.member.dark .member-container {
+    box-shadow: 2px 2px 5px var(--shadow-dark);
+}
+
+.member .member-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+
+.member .member-header .member-header-title {
+    font-size: 27px;
+    font-weight: 600;
+}
+
+.member .member-header .member-header-button button {
+    padding: 5px 10px;
+    border-radius: 6px;
+    outline: none;
+    background-color: transparent;
+    border: 2px solid green;
+    color: green;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    line-height: 25px;
+    cursor: pointer;
+}
+
+.member .member-list {
+    border-radius: 10px;
+    margin: 10px auto;
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+.member .member-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+.member .member-table tr td {
+    padding: 5px 0px;
+    text-align: center;
+    position: relative;
+}
+
+.member .member-table tr td span {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.member.light .member-table tr:nth-child(even) {
+    background-color: #f8f6ff;
+}
+.member.dark .member-table tr:nth-child(even) {
+    background-color: var(--task-dark);
+}
+
+.member .member-table th {
+    background-color: var(--main-color);
+    color: var(--text-dark);
+    padding: 15px;
+}
+
+.member .member-table td > div {
+    display: flex;
+    justify-content: center;
+}
+
+.member .member-table .member-table-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 12px 0px;
+}
+
+.member .member-table .member-table-actions .member-table-function {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    cursor: pointer;
+    justify-content: center;
+}
+.member .member-table .member-table-actions .member-table-function:disabled {
+    cursor: not-allowed;
+}
+.member.dark .member-table .member-table-actions .member-table-function {
+    background-color: var(--background-dark);
+}
+.member.light .member-table .member-table-actions .member-table-function {
+    background-color: var(--background-light);
+}
+
+.member .member-table .member-table-actions .member-table-function.delete {
+    color: red;
+    border: 2px solid red;
+}
+
+.member .member-table .member-table-actions .member-table-function.save {
+    border: 2px solid green;
+    color: green;
+}
+
+.member .member-table .member-table-actions .member-table-function.edit {
+    border: 2px solid rgb(239, 155, 0);
+    color: rgb(239, 155, 0);
+}
+
+.member .member-table .member-table-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    margin: 3px 0px;
+}

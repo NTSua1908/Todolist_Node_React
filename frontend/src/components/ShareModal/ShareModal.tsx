@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import { userSelects } from "../../mock/user";
-import AutoComplete, { AutoCompleteItem } from "../AutoComplete/AutoComplete";
-import { IoIosCloseCircle, IoMdAdd } from "react-icons/io";
-import "./shareModal.css";
-import SelectBox, { SelectBoxOption } from "../SelectBox/SelectBox";
+import { IoMdAdd } from "react-icons/io";
+import { MdClose, MdDelete, MdEdit, MdSave } from "react-icons/md";
 import ProjectRole from "../../enums/ProjectRole";
-import ProjectShareModel from "../../models/ProjectModel/ProjectShareModel";
-import { FaCheck } from "react-icons/fa";
-import { MdDelete, MdEdit, MdSave } from "react-icons/md";
-import { MdClose } from "react-icons/md";
+import { projectRoles } from "../../helper/Common";
 import { useTheme } from "../../hooks/ThemeContext";
-import Modal, { ModalType } from "../Modal/Modal";
+import { userSelects } from "../../mock/user";
+import ProjectShareModel from "../../models/ProjectModel/ProjectShareModel";
+import AutoComplete, { AutoCompleteItem } from "../AutoComplete/AutoComplete";
 import Loading from "../Loading/Loading";
+import Modal, { ModalType } from "../Modal/Modal";
+import SelectBox from "../SelectBox/SelectBox";
+import "./shareModal.css";
 
 interface ShareModalProps {
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -27,17 +26,6 @@ interface UserSharedItem {
     username: string;
     role: ProjectRole;
 }
-
-const projectRoles: SelectBoxOption[] = [
-    {
-        name: ProjectRole[ProjectRole.Editor],
-        value: ProjectRole.Editor,
-    },
-    {
-        name: ProjectRole[ProjectRole.Viewer],
-        value: ProjectRole.Viewer,
-    },
-];
 
 function ShareModal({ setShowModal }: ShareModalProps) {
     const { theme } = useTheme();

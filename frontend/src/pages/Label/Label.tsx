@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from "react";
-import "./stage.css";
-import Header from "../../components/Header/Header";
+import { notification } from "antd";
+import { useEffect, useState } from "react";
 import { IoIosAdd } from "react-icons/io";
-import StageListModel from "../../models/StageModel/StageListModel";
-import { useTheme } from "../../hooks/ThemeContext";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { stageList } from "../../mock/stage";
+import AddLabelBox from "../../components/AddLabelBox/AddLabelBox";
+import Header from "../../components/Header/Header";
 import Loading from "../../components/Loading/Loading";
 import Modal, { ModalType } from "../../components/Modal/Modal";
-import AddStageBox from "../../components/AddStageBox/AddStageBox";
-import { getProgressColor } from "../../helper/Common";
-import { notification } from "antd";
 import Percentage from "../../components/Percentage/Percentage";
+import { getProgressColor } from "../../helper/Common";
+import { useTheme } from "../../hooks/ThemeContext";
+import { labels } from "../../mock/labels";
+import LabelListModel from "../../models/LabelModel/LabelListModel";
+import "./label.css";
 
-function Stage() {
-    const [stages, setStages] = useState<StageListModel[]>([]);
+function Label() {
+    const [Labels, setLabels] = useState<LabelListModel[]>([]);
     const [totalPage, setTotalPage] = useState(1);
     const [currentPage, setCurrentPage] = useState(0);
 
-    const [actionStageId, setActionStageId] = useState<string | null>(null);
+    const [actionLabelId, setActionLabelId] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const [isShowBox, setShowBox] = useState(false);
     const [isShowModal, setShowModal] = useState(false);
@@ -43,85 +43,86 @@ function Stage() {
     const { theme } = useTheme();
 
     useEffect(() => {
-        getStageList();
+        getLabelList();
     }, [currentPage]);
 
-    const getStageList = () => {
-        setStages(stageList);
+    const getLabelList = () => {
+        setLabels(labels);
     };
 
-    const handleAddStage = async (name: string) => {
+    const handleAddLabel = async (name: string, color: string) => {
         setLoading(true);
         await new Promise((r) => setTimeout(r, 1000));
-        setStages([
-            { id: "", name, percentCompleted: 100, taskCount: 0 },
-            ...stages,
+        setLabels([
+            { id: "", color, name, percentCompleted: 100, taskCount: 0 },
+            ...Labels,
         ]);
         setLoading(false);
     };
 
-    const handleEditStage = async (name: string) => {
+    const handleEditLabel = async (name: string, color: string) => {
         setLoading(true);
         await new Promise((r) => setTimeout(r, 1000));
-        setStages(
-            stages.map((stage) => {
-                if (stage.id === actionStageId) {
-                    stage.name = name;
-                    return stage;
+        setLabels(
+            Labels.map((label) => {
+                if (label.id === actionLabelId) {
+                    label.name = name;
+                    label.color = color;
+                    return label;
                 }
-                return stage;
+                return label;
             })
         );
-        setActionStageId(null);
+        setActionLabelId(null);
         setLoading(false);
     };
 
-    const onDelete = (stage: StageListModel) => {
-        if (stage.taskCount !== 0) {
-            openNotificationFailure("You can only delete an empty stage.");
+    const onDelete = (Label: LabelListModel) => {
+        if (Label.taskCount !== 0) {
+            openNotificationFailure("You can only delete an empty Label.");
         } else {
-            setActionStageId(stage.id);
+            setActionLabelId(Label.id);
             setShowModal(true);
         }
     };
 
-    const handleDeleteStage = async () => {
+    const handleDeleteLabel = async () => {
         setLoading(true);
         await new Promise((r) => setTimeout(r, 1000));
-        setStages(stages.filter((stage) => stage.id !== actionStageId));
-        setActionStageId(null);
+        setLabels(Labels.filter((Label) => Label.id !== actionLabelId));
+        setActionLabelId(null);
         setLoading(false);
     };
 
     useEffect(() => {
         if (!isShowBox && !isShowModal) {
-            setActionStageId(null);
+            setActionLabelId(null);
         }
     }, [isShowBox, isShowModal]);
 
     return (
-        <div className={`stage ${theme}`}>
+        <div className={`label ${theme}`}>
             {contextHolder}
             <Header />
-            <div className='stage-container'>
-                <div className='stage-header'>
-                    <div className='stage-header-title'>Stages</div>
-                    <div className='stage-header-button'>
+            <div className='label-container'>
+                <div className='label-header'>
+                    <div className='label-header-title'>Labels</div>
+                    <div className='label-header-button'>
                         <button
-                            title='Add new stage'
+                            title='Add new Label'
                             onClick={() => {
                                 setShowBox(true);
                             }}
                         >
-                            <span className='stage-header-button-icon'>
+                            <span className='label-header-button-icon'>
                                 <IoIosAdd />
                             </span>
-                            New stage
+                            New Label
                         </button>
                     </div>
                 </div>
-                <div className='stage-content'>
-                    <div className='stage-table'>
+                <div className='label-content'>
+                    <div className='label-table'>
                         <table>
                             <thead>
                                 <tr>
@@ -139,38 +140,47 @@ function Stage() {
                             </thead>
 
                             <tbody>
-                                {stages.map((stage, index) => (
+                                {Labels.map((label, index) => (
                                     <tr key={index}>
                                         <td>{index + 1}</td>
                                         <td
                                             width={150}
                                             style={{ textAlign: "left" }}
                                         >
-                                            {" "}
-                                            {stage.name}
+                                            <div
+                                                className='label-table-name'
+                                                style={{
+                                                    backgroundColor:
+                                                        label.color,
+                                                }}
+                                            >
+                                                {label.name}
+                                            </div>
                                         </td>
-                                        <td>{stage.taskCount}</td>
+                                        <td>{label.taskCount}</td>
                                         <td>
-                                            <div className='stage-table-percent'>
-                                                <Percentage
-                                                    percent={
-                                                        stage.percentCompleted /
-                                                        100
-                                                    }
-                                                    color={getProgressColor(
-                                                        stage.percentCompleted /
+                                            <div className='label-table-percent'>
+                                                <div className='stage-table-percent'>
+                                                    <Percentage
+                                                        percent={
+                                                            label.percentCompleted /
                                                             100
-                                                    )}
-                                                />
+                                                        }
+                                                        color={getProgressColor(
+                                                            label.percentCompleted /
+                                                                100
+                                                        )}
+                                                    />
+                                                </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <div className='stage-table-actions'>
+                                            <div className='label-table-actions'>
                                                 <button
-                                                    className='stage-table-function edit'
+                                                    className='label-table-function edit'
                                                     onClick={() => {
-                                                        setActionStageId(
-                                                            stage.id
+                                                        setActionLabelId(
+                                                            label.id
                                                         );
                                                         setShowBox(true);
                                                     }}
@@ -178,9 +188,9 @@ function Stage() {
                                                     <MdEdit title='Edit' />
                                                 </button>
                                                 <button
-                                                    className='stage-table-function delete'
+                                                    className='label-table-function delete'
                                                     onClick={() => {
-                                                        onDelete(stage);
+                                                        onDelete(label);
                                                     }}
                                                 >
                                                     <MdDelete title='Delete' />
@@ -195,20 +205,24 @@ function Stage() {
                 </div>
             </div>
             <Modal
-                description='Do you want to delete this stage?'
+                description='Do you want to delete this Label?'
                 setShow={setShowModal}
                 type={ModalType.Alert}
-                onAccept={handleDeleteStage}
+                onAccept={handleDeleteLabel}
                 show={isShowModal}
             />
             {isShowBox && (
-                <AddStageBox
+                <AddLabelBox
                     setShowBox={setShowBox}
-                    edit={actionStageId !== null}
-                    onEdit={handleEditStage}
-                    onAdd={handleAddStage}
-                    value={
-                        stages.find((stage) => stage.id === actionStageId)?.name
+                    edit={actionLabelId !== null}
+                    onEdit={handleEditLabel}
+                    onAdd={handleAddLabel}
+                    name={
+                        Labels.find((Label) => Label.id === actionLabelId)?.name
+                    }
+                    color={
+                        Labels.find((Label) => Label.id === actionLabelId)
+                            ?.color
                     }
                 />
             )}
@@ -217,4 +231,4 @@ function Stage() {
     );
 }
 
-export default Stage;
+export default Label;
