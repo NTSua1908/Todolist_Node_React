@@ -1,0 +1,168 @@
+@import url("../../theme.css");
+
+.register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 30px 5px;
+}
+.register.light {
+    background-color: var(--background-light);
+    color: var(--text-light);
+}
+.register.dark {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+}
+.register.dark label {
+    color: var(--main-color);
+}
+
+.register .register-container {
+    width: 450px;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid #ebeef5;
+}
+.register .register-logo {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+}
+.register .register-title {
+    text-align: center;
+    color: var(--main-color);
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1.2;
+    display: block;
+    padding: 20px 0px;
+}
+.register .register-form .ant-form-item {
+    margin: 10px 0px 13px 0px;
+}
+.register .register-form-input {
+    height: 45px;
+}
+
+.register.dark .ant-input-outlined {
+    background-color: var(--background-dark) !important;
+}
+
+.register .ant-input {
+    text-indent: 10px;
+}
+.register.light .ant-input {
+    background-color: var(--column-light);
+}
+.register.dark .ant-input {
+    background-color: var(--task-dark);
+    color: var(--text-dark);
+}
+.register.dark .ant-input::placeholder {
+    color: #999;
+}
+.register.dark .ant-input-prefix,
+.register.dark .ant-input-suffix .ant-input-password-icon {
+    color: var(--text-dark);
+}
+
+.register .register-form-input .ant-input-prefix {
+    padding: 0 5px;
+}
+.register .register-form-input .ant-input {
+    text-indent: 10px;
+}
+.register .register-form-function {
+    padding: 10px 0px;
+}
+
+.register.light .register-container .register-form-function a {
+    color: var(--second-color);
+    font-weight: 500;
+}
+.register.dark .register-container .register-form-function a {
+    color: var(--main-color);
+    font-weight: 500;
+}
+.register.light .register-container .register-form-function a:hover {
+    color: #773ec7;
+    text-decoration: underline;
+}
+.register.dark .register-container .register-form-function a:hover {
+    color: var(--button-color);
+    text-decoration: underline;
+}
+
+.register .register-container .register-form-submit {
+    border-radius: 5px;
+    width: 100%;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    outline: none;
+    border: 1px solid;
+}
+
+.register.light .register-container .register-form-submit {
+    color: #ffc562;
+    background-color: var(--second-color);
+}
+.register.dark .register-container .register-form-submit {
+    color: var(--text-dark);
+    background-color: var(--main-color);
+}
+.register.dark .register-container .register-form-submit:hover {
+    background-color: var(--button-color);
+}
+
+.register .register-other {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.register .register-other hr,
+.register .register-other span {
+    flex: 1;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+}
+.register .register-other-function {
+    display: flex;
+    margin-top: 12px;
+}
+
+.register .register-other-function-item {
+    flex: 1;
+    outline: none;
+    border: 1px solid #ccc;
+    padding: 8px 0px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.register.light .register-other-function-item {
+    background-color: var(--background-light);
+    color: var(--text-light);
+}
+.register.dark .register-other-function-item {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+}
+
+.register .register-other-function-item span {
+    margin-left: 5px;
+}
+
+.register .register-other-function-devider {
+    width: 10px;
+}

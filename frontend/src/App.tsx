@@ -5,6 +5,10 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Stage from "./pages/Stage/Stage";
 import Label from "./pages/Label/Label";
 import Member from "./pages/Member/Member";
+import Login from "./pages/Login/Login";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import Register from "./pages/Register/Register";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
 
 function App() {
     const { theme } = useTheme();
@@ -29,6 +33,16 @@ function App() {
                         path='/project/:projectSlug/stages'
                         element={<Stage />}
                     />
+                    <Route path='/login' element={<Login />} />
+                    <Route
+                        path='/forgotPassword'
+                        element={<ForgotPassword />}
+                    />
+                    <Route
+                        path='/resetPassword/:token/:email'
+                        element={<ResetPassword />}
+                    />
+                    <Route path='/register' element={<Register />} />
                 </Routes>
             </Router>
         </div>

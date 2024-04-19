@@ -44,3 +44,7 @@
 .App.light ::-webkit-scrollbar-thumb:active {
     background: transparent;
 }
+
+input:-webkit-autofill {
+    transition: all 5000s ease-in-out 0s;
+}

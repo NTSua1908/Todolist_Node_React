@@ -1,0 +1,176 @@
+@import url("../../theme.css");
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 30px 5px;
+}
+.login.light {
+    background-color: var(--background-light);
+    color: var(--text-light);
+}
+.login.dark {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+}
+
+.login .login-container {
+    width: 450px;
+    border-radius: 15px;
+    padding: 40px 20px 20px 20px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid #ebeef5;
+}
+.login.dark .login-container {
+    background-color: var(--column-dark);
+    box-shadow: 0 2px 5px var(--shadow-dark);
+}
+
+.login .login-container .login-logo {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+}
+
+.login .login-container .login-title {
+    color: var(--main-color);
+    text-align: center;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1.2;
+    display: block;
+    padding: 20px 0px;
+}
+
+.login .login-container .login-form .ant-form-item {
+    margin: 13px 0px;
+}
+.login .login-container .login-form-input {
+    height: 45px;
+}
+
+.login .login-container .login-form-input .ant-input-prefix {
+    padding: 0 5px;
+    color: var(--second-color);
+}
+
+.login.dark .login-container .login-form-input .ant-input-prefix,
+.login.dark
+    .login-container
+    .ant-input-password.login-form-input
+    .ant-input-suffix
+    span {
+    color: var(--text-dark);
+}
+
+.login.dark .login-container .login-form-input.ant-input-outlined {
+    background-color: var(--background-dark) !important;
+}
+
+.login .login-container .login-form-input .ant-input {
+    text-indent: 10px;
+}
+.login.light .login-container .login-form-input .ant-input {
+    background-color: var(--column-light);
+}
+.login.dark .login-container .login-form-input .ant-input {
+    background-color: var(--task-dark);
+    color: var(--text-dark);
+}
+.login.dark .login-container .login-form-input .ant-input::placeholder {
+    color: #999;
+}
+
+.login .login-container .login-form-function {
+    padding: 10px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+.login.light .login-container .login-form-function a {
+    color: var(--second-color);
+    font-weight: 500;
+}
+.login.dark .login-container .login-form-function a {
+    color: var(--main-color);
+    font-weight: 500;
+}
+.login.light .login-container .login-form-function a:hover {
+    color: #773ec7;
+    text-decoration: underline;
+}
+.login.dark .login-container .login-form-function a:hover {
+    color: var(--button-color);
+    text-decoration: underline;
+}
+
+.login .login-container .login-form-submit {
+    border-radius: 5px;
+    width: 100%;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    outline: none;
+    border: 1px solid;
+}
+
+.login.light .login-container .login-form-submit {
+    color: #ffc562;
+    background-color: var(--second-color);
+}
+.login.dark .login-container .login-form-submit {
+    color: var(--text-dark);
+    background-color: var(--main-color);
+}
+.login.dark .login-container .login-form-submit:hover {
+    background-color: var(--button-color);
+}
+
+.login .login-other {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login .login-other hr,
+.login .login-other span {
+    flex: 1;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.login .login-other-function {
+    display: flex;
+    margin-top: 12px;
+}
+.login .login-other-function-item {
+    flex: 1;
+    outline: none;
+    border: 1px solid #ccc;
+    padding: 8px 0px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.login.light .login-other-function-item {
+    background-color: var(--background-light);
+    color: var(--text-light);
+}
+.login.dark .login-other-function-item {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+}
+
+.login .login-other-function-item span {
+    margin-left: 5px;
+}
+.login .login-other-function-devider {
+    width: 10px;
+}
