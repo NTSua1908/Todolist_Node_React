@@ -9,6 +9,7 @@ import Login from "./pages/Login/Login";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import Register from "./pages/Register/Register";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
+import RegisterSuccess from "./pages/RegisterSuccess/RegisterSuccess";
 
 function App() {
     const { theme } = useTheme();
@@ -43,6 +44,10 @@ function App() {
                         element={<ResetPassword />}
                     />
                     <Route path='/register' element={<Register />} />
+                    <Route
+                        path='/checkEmail/:emailResend'
+                        element={<RegisterSuccess />}
+                    />
                 </Routes>
             </Router>
         </div>

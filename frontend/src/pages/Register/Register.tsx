@@ -204,7 +204,7 @@ const Register: React.FC = () => {
                 <div className='register-logo'>
                     <Logo />
                 </div>
-                <h5 className='register-title'>Register Golbaus</h5>
+                <h5 className='register-title'>Register Odotaus</h5>
                 <RegisterForm
                     onRegister={handleRegister}
                     returnPath={state.returnPath}
