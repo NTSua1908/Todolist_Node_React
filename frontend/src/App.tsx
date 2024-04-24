@@ -10,7 +10,7 @@ import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import Register from "./pages/Register/Register";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import RegisterSuccess from "./pages/RegisterSuccess/RegisterSuccess";
-import TaskDetail from "./pages/TaskDetail/TaskDetail";
+import ConfirmEmail from "./pages/ConfirmEmail/ConfirmEmail";
 
 function App() {
   const { theme } = useTheme();
@@ -20,7 +20,6 @@ function App() {
       <Router>
         <Routes>
           <Route path='/project/:projectSlug' element={<Dashboard />} />
-          <Route path='/project/:projectSlug/:index' element={<TaskDetail />} />
           <Route path='/project/:projectSlug/members' element={<Member />} />
           <Route path='/project/:projectSlug/labels' element={<Label />} />
           <Route path='/project/:projectSlug/stages' element={<Stage />} />
@@ -34,6 +33,10 @@ function App() {
           <Route
             path='/checkEmail/:emailResend'
             element={<RegisterSuccess />}
+          />
+          <Route
+            path='/ConfirmEmail/:token/:email'
+            element={<ConfirmEmail />}
           />
         </Routes>
       </Router>
