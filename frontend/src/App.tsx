@@ -10,48 +10,35 @@ import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import Register from "./pages/Register/Register";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import RegisterSuccess from "./pages/RegisterSuccess/RegisterSuccess";
+import TaskDetail from "./pages/TaskDetail/TaskDetail";
 
 function App() {
-    const { theme } = useTheme();
+  const { theme } = useTheme();
 
-    return (
-        <div className={`App ${theme}`}>
-            <Router>
-                <Routes>
-                    <Route
-                        path='/project/:projectSlug'
-                        element={<Dashboard />}
-                    />
-                    <Route
-                        path='/project/:projectSlug/members'
-                        element={<Member />}
-                    />
-                    <Route
-                        path='/project/:projectSlug/labels'
-                        element={<Label />}
-                    />
-                    <Route
-                        path='/project/:projectSlug/stages'
-                        element={<Stage />}
-                    />
-                    <Route path='/login' element={<Login />} />
-                    <Route
-                        path='/forgotPassword'
-                        element={<ForgotPassword />}
-                    />
-                    <Route
-                        path='/resetPassword/:token/:email'
-                        element={<ResetPassword />}
-                    />
-                    <Route path='/register' element={<Register />} />
-                    <Route
-                        path='/checkEmail/:emailResend'
-                        element={<RegisterSuccess />}
-                    />
-                </Routes>
-            </Router>
-        </div>
-    );
+  return (
+    <div className={`App ${theme}`}>
+      <Router>
+        <Routes>
+          <Route path='/project/:projectSlug' element={<Dashboard />} />
+          <Route path='/project/:projectSlug/:index' element={<TaskDetail />} />
+          <Route path='/project/:projectSlug/members' element={<Member />} />
+          <Route path='/project/:projectSlug/labels' element={<Label />} />
+          <Route path='/project/:projectSlug/stages' element={<Stage />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/forgotPassword' element={<ForgotPassword />} />
+          <Route
+            path='/resetPassword/:token/:email'
+            element={<ResetPassword />}
+          />
+          <Route path='/register' element={<Register />} />
+          <Route
+            path='/checkEmail/:emailResend'
+            element={<RegisterSuccess />}
+          />
+        </Routes>
+      </Router>
+    </div>
+  );
 }
 
 export default App;
