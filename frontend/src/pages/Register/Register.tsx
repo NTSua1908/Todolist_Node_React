@@ -48,7 +48,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
             <Form.Item
                 name='userName'
                 rules={[
-                    { required: true, message: "Please input your user name!" },
+                    { required: true, message: "Please input your username!" },
                     { validator: validateUsername },
                 ]}
                 hasFeedback

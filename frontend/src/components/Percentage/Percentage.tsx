@@ -9,7 +9,7 @@ interface PercentageProps {
 
 function Percentage({ percent, color }: PercentageProps) {
     const { theme } = useTheme();
-    console.log(percent);
+
     return (
         <div className={`percentage ${theme}`}>
             <div className='percentage-circle'>
