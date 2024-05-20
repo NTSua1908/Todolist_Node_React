@@ -32,3 +32,19 @@ export function formatDayAgo(date: Date): string {
     return formatDateToStringDay(dateObject);
   }
 }
+
+export function formatDateTimeToString(date: Date): string {
+  if (!date) return "";
+  const dateObject = typeof date === "string" ? new Date(date) : date;
+  const options: Intl.DateTimeFormatOptions = {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  };
+
+  const dateString = dateObject.toLocaleDateString(undefined, options);
+
+  return dateString;
+}

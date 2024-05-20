@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
-import { useTheme } from "../../hooks/ThemeContext";
+import { useTheme } from "../../contexts/ThemeContext";
 import "./searchBox.css";
 
 interface SearchBoxProps {
@@ -32,13 +32,13 @@ function SearchBox({ onSearch, placeHolder }: SearchBoxProps) {
   return (
     <div className={`searchBox ${theme}`}>
       <input
-        type='text'
-        className='searchBox-input'
+        type="text"
+        className="searchBox-input"
         onChange={handleChange}
         placeholder={placeHolder}
       />
       <div
-        className='searchBox-button'
+        className="searchBox-button"
         onClick={() => {
           onSearch(text);
         }}

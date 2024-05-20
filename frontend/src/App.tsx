@@ -1,6 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
-import { useTheme } from "./hooks/ThemeContext";
+import { useTheme } from "./contexts/ThemeContext";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Stage from "./pages/Stage/Stage";
 import Label from "./pages/Label/Label";
@@ -11,6 +11,7 @@ import Register from "./pages/Register/Register";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import RegisterSuccess from "./pages/RegisterSuccess/RegisterSuccess";
 import ConfirmEmail from "./pages/ConfirmEmail/ConfirmEmail";
+import TaskDetail from "./pages/TaskDetail/TaskDetail";
 
 function App() {
   const { theme } = useTheme();
@@ -19,23 +20,27 @@ function App() {
     <div className={`App ${theme}`}>
       <Router>
         <Routes>
-          <Route path='/project/:projectSlug' element={<Dashboard />} />
-          <Route path='/project/:projectSlug/members' element={<Member />} />
-          <Route path='/project/:projectSlug/labels' element={<Label />} />
-          <Route path='/project/:projectSlug/stages' element={<Stage />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/forgotPassword' element={<ForgotPassword />} />
+          <Route path="/project/:projectSlug" element={<Dashboard />} />
+          <Route path="/project/:projectSlug/members" element={<Member />} />
+          <Route path="/project/:projectSlug/labels" element={<Label />} />
+          <Route path="/project/:projectSlug/stages" element={<Stage />} />
           <Route
-            path='/resetPassword/:token/:email'
+            path="/project/:projectSlug/task/:index"
+            element={<TaskDetail />}
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
+          <Route
+            path="/resetPassword/:token/:email"
             element={<ResetPassword />}
           />
-          <Route path='/register' element={<Register />} />
+          <Route path="/register" element={<Register />} />
           <Route
-            path='/checkEmail/:emailResend'
+            path="/checkEmail/:emailResend"
             element={<RegisterSuccess />}
           />
           <Route
-            path='/ConfirmEmail/:token/:email'
+            path="/ConfirmEmail/:token/:email"
             element={<ConfirmEmail />}
           />
         </Routes>

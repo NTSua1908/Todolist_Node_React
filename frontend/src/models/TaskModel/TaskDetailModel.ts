@@ -17,11 +17,13 @@ interface TaskDetailModel {
   description: string;
   labels: LabelModel[];
   user: UserShortModel;
-  createdDate: Date;
   deadline: Date;
   isMyTask: boolean;
   tasks: SubTaskModel[];
   isFollowing: boolean;
+  createdDate: Date;
+  createdById: string;
+  createdBy: string; //display name
   //actities
   //comments
 }

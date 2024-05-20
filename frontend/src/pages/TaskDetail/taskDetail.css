@@ -21,10 +21,156 @@
   width: 1000px;
   margin: 0 auto;
   height: calc(100% - var(--header-height));
+  border: 1px solid #ccc;
 }
 .taskDetail.light .taskDetail-container {
   box-shadow: 0px 0px 2px var(--shadow-light);
 }
 .taskDetail.dark .taskDetail-container {
   box-shadow: 2px 2px 5px var(--shadow-dark);
+}
+
+/* Title */
+.taskDetail .taskDetail-header {
+  border-radius: 10px;
+}
+
+.taskDetail .taskDetail-header .taskDetail-header-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.taskDetail .taskDetail-header .taskDetail-header-options {
+  position: relative;
+}
+
+.taskDetail
+  .taskDetail-header
+  .taskDetail-header-options
+  .taskDetail-header-options-icon {
+  width: 50px;
+  text-align: right;
+  cursor: pointer;
+}
+
+.taskDetail
+  .taskDetail-header
+  .taskDetail-header-options
+  .taskDetail-header-options-container {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 5px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+.taskDetail.light
+  .taskDetail-header
+  .taskDetail-header-options
+  .taskDetail-header-options-container {
+  background-color: var(--background-light);
+  color: var(--shadow-light);
+}
+.taskDetail.dark
+  .taskDetail-header
+  .taskDetail-header-options
+  .taskDetail-header-options-container {
+  background-color: var(--background-dark);
+  color: var(--text-dark);
+}
+
+.taskDetail
+  .taskDetail-header
+  .taskDetail-header-options:hover
+  .taskDetail-header-options-container {
+  display: block;
+}
+
+.taskDetail
+  .taskDetail-header
+  .taskDetail-header-options
+  .taskDetail-header-options-container
+  .taskDetail-header-options-item {
+  padding: 7px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.taskDetail.dark
+  .taskDetail-header
+  .taskDetail-header-options
+  .taskDetail-header-options-container
+  .taskDetail-header-options-item:hover {
+  background-color: var(--background-light);
+  color: var(--text-light);
+}
+.taskDetail.light
+  .taskDetail-header
+  .taskDetail-header-options
+  .taskDetail-header-options-container
+  .taskDetail-header-options-item:hover {
+  background-color: var(--background-dark);
+  color: var(--text-dark);
+}
+
+/* Deadline */
+.taskDetail .taskDetail-header .taskDetail-header-deadline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0px;
+}
+
+.taskDetail .taskDetail-header a {
+  text-decoration: none;
+  color: var(--main-color);
+  font-weight: bold;
+}
+
+.taskDetail .taskDetail-header .taskDetail-header-deadline-left {
+  display: flex;
+  align-items: center;
+}
+
+.taskDetail .taskDetail-header .taskDetail-header-stage {
+  background-color: var(--main-color);
+  color: var(--text-dark);
+  border-radius: 10px;
+  padding: 4px 12px;
+  margin-right: 20px;
+}
+
+.taskDetail .taskDetail-header .taskDetail-header-labels-item {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 10px;
+  margin-right: 10px;
+  font-size: 14px;
+  color: #f0f0f0;
+}
+
+.taskDetail .taskDetail-header .taskDetail-header-user,
+.taskDetail .taskDetail-header .taskDetail-header-userinfo,
+.taskDetail .taskDetail-header .taskDetail-header-userinfo-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.taskDetail .taskDetail-header .taskDetail-header-userinfo-name {
+  margin: 0px 5px;
+}
+
+.taskDetail .taskDetail-header .taskDetail-header-user img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
+  border: 1px solid #c5c5c5;
 }

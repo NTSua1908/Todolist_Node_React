@@ -50,6 +50,8 @@ const taskDetail: TaskDetailModel = {
       "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/11/avatar-dep-107.jpg",
   },
   isFollowing: true,
+  createdBy: "Nguyen Van Admin",
+  createdById: "a5111b5c-7c1d-4bd9-a3f8-b758b12d7a6c",
 };
 
 export default taskDetail;

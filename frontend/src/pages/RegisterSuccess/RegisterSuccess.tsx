@@ -7,14 +7,14 @@ import { notification } from "antd";
 import { FaChevronLeft } from "react-icons/fa";
 import { validateEmail } from "../../helper/InformationValidater";
 import "./registerSuccess.css";
-import { useTheme } from "../../hooks/ThemeContext";
+import { useTheme } from "../../contexts/ThemeContext";
 
 function RegisterSuccess() {
-    const [email, setEmail] = useState(useLocation().state?.email ?? "");
-    const { emailResend } = useParams();
-    const [api, contextHolder] = notification.useNotification();
-    const navigate = useNavigate();
-    const { theme } = useTheme();
+  const [email, setEmail] = useState(useLocation().state?.email ?? "");
+  const { emailResend } = useParams();
+  const [api, contextHolder] = notification.useNotification();
+  const navigate = useNavigate();
+  const { theme } = useTheme();
 
   const handleResendVerifyEmail = async () => {
     // await ResendVerifyEmail(email)
@@ -66,46 +66,17 @@ function RegisterSuccess() {
     }
   }, []);
 
-    return (
-        <div className={`registerSuccess ${theme}`}>
-            {contextHolder}
-            <div className='registerSuccess-container'>
-                {((!emailResend && email !== "") || isEmailValid) && (
-                    <div className='registerSuccess-content'>
-                        <div className='registerSuccess-img'>
-                            <img src={Email} alt='' />
-                        </div>
-                        <div className='registerSuccess-title'>Check email</div>
-                        <div className='registerSuccess-message'>
-                            <p>
-                                Please check your email inbox and click on the
-                                provided link to verify your email. If you don't
-                                receive email,{" "}
-                                <span onClick={handleResendVerifyEmail}>
-                                    click here to resend.
-                                </span>
-                            </p>
-                        </div>
-                        <div
-                            className='registerSuccess-button'
-                            onClick={() => {
-                                navigate("/login");
-                            }}
-                        >
-                            <FaChevronLeft style={{ marginRight: "10px" }} />{" "}
-                            Back to login
-                        </div>
-                    </div>
-                )}
-                {((!emailResend && email === "") ||
-                    (emailResend && !isEmailValid)) && (
-                    <div className='registerSuccess-invalid'>
-                        Invalid activation link
-                    </div>
-                )}
+  return (
+    <div className={`registerSuccess ${theme}`}>
+      {contextHolder}
+      <div className="registerSuccess-container">
+        {((!emailResend && email !== "") || isEmailValid) && (
+          <div className="registerSuccess-content">
+            <div className="registerSuccess-img">
+              <img src={Email} alt="" />
             </div>
-            <div className='registerSuccess-title'>Check email</div>
-            <div className='registerSuccess-message'>
+            <div className="registerSuccess-title">Check email</div>
+            <div className="registerSuccess-message">
               <p>
                 Please check your email inbox and click on the provided link to
                 verify your email. If you don't receive email,{" "}
@@ -115,7 +86,7 @@ function RegisterSuccess() {
               </p>
             </div>
             <div
-              className='registerSuccess-button'
+              className="registerSuccess-button"
               onClick={() => {
                 navigate("/login");
               }}
@@ -125,11 +96,31 @@ function RegisterSuccess() {
           </div>
         )}
         {((!emailResend && email === "") || (emailResend && !isEmailValid)) && (
-          <div className='registerSuccess-invalid'>Invalid activation link</div>
+          <div className="registerSuccess-invalid">Invalid activation link</div>
         )}
+      </div>
+      <div className="registerSuccess-title">Check email</div>
+      <div className="registerSuccess-message">
+        <p>
+          Please check your email inbox and click on the provided link to verify
+          your email. If you don't receive email,{" "}
+          <span onClick={handleResendVerifyEmail}>click here to resend.</span>
+        </p>
+      </div>
+      <div
+        className="registerSuccess-button"
+        onClick={() => {
+          navigate("/login");
+        }}
+      >
+        <FaChevronLeft style={{ marginRight: "10px" }} /> Back to login
       </div>
     </div>
   );
+
+  // {((!emailResend && email === "") || (emailResend && !isEmailValid)) && (
+  //   <div className='registerSuccess-invalid'>Invalid activation link</div>
+  // )}
 }
 
 export default RegisterSuccess;

@@ -4,7 +4,7 @@ import { FiLoader } from "react-icons/fi";
 import "./addTask.css";
 import CreateTaskModel from "../../models/TaskModel/TaskCreateModel";
 import { Spin } from "antd";
-import { useTheme } from "../../hooks/ThemeContext";
+import { useTheme } from "../../contexts/ThemeContext";
 
 interface AddTaskProps {
   onCreate: (task: CreateTaskModel) => Promise<void>;
@@ -42,25 +42,25 @@ const AddTask: React.FC<AddTaskProps> = ({
 
   return (
     <div className={`addTask ${theme}`}>
-      <div className='addTask-title'>Title</div>
+      <div className="addTask-title">Title</div>
       <input
-        type='text'
-        name='title'
-        className='addTask-input'
+        type="text"
+        name="title"
+        className="addTask-input"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <div className='addTask-function'>
+      <div className="addTask-function">
         <button
-          className='addTask-function-button'
+          className="addTask-function-button"
           onClick={handleCancel}
           disabled={loading}
         >
           Cancel
         </button>
-        <button className='addTask-function-button' onClick={handleAddTask}>
+        <button className="addTask-function-button" onClick={handleAddTask}>
           Create{" "}
-          {loading && <Spin style={{ marginLeft: "3px" }} size='small' />}
+          {loading && <Spin style={{ marginLeft: "3px" }} size="small" />}
         </button>
       </div>
     </div>
