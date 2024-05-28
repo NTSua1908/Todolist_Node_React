@@ -1,0 +1,45 @@
+@import url("../../theme.css");
+
+.activityBox {
+  padding: 40px 0px;
+}
+
+.activityBox .activityBox-title {
+  padding-bottom: 15px;
+}
+
+.activityBox .activityBox-item {
+  display: flex;
+  align-items: center;
+}
+.activityBox .activityBox-item-container {
+  padding: 12px 0px 12px 0px;
+  margin-left: 10px;
+}
+
+.activityBox .activityBox-item:not(:last-child) .activityBox-item-container {
+  border-bottom: 1px dashed #ccc;
+}
+
+.activityBox .activityBox-item-icon {
+  font-size: 18px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.activityBox .activityBox-item-highlight {
+  color: var(--main-color);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0px 5px;
+}
+.activityBox .activityBox-item-highlight.click {
+  cursor: pointer;
+}
+
+.activityBox .activityBox-item-date {
+  font-style: italic;
+  font-weight: bold;
+  padding: 0px 5px;
+}

@@ -5,7 +5,7 @@ import { FetchingErrorHandler } from "../../helper/FetchingErrorHandler";
 import ColumnDashboardModel from "../../models/StageModel/StageDashboardModel";
 import { GetAllTask } from "../../services/TaskService";
 import "./dashboard.css";
-import { dashboard } from "../../mock/dashboard";
+import { dashboard } from "../../mock/dashboard.mock";
 import Columns from "../../components/Columns/Columns";
 import Board from "../../components/Board/Board";
 import { useTheme } from "../../contexts/ThemeContext";

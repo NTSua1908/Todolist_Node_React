@@ -8,9 +8,9 @@ import { ParseProjectsToSelectBoxOptions } from "../../helper/SelectBoxParseOpti
 import { useTheme } from "../../contexts/ThemeContext";
 import Logo from "../../images/Logo";
 import DefaultAvatar from "../../images/default_avatar.png";
-import notificationDatas from "../../mock/notification";
-import Projects from "../../mock/projects";
-import { userLogin } from "../../mock/user";
+import notificationDatas from "../../mock/notification.mock";
+import Projects from "../../mock/projects.mock";
+import { userLogin } from "../../mock/user.mock";
 import NotificationModel from "../../models/Notification/NoticationModel";
 import ProjectListModel from "../../models/ProjectModel/ProjectListModel";
 import LeftMenu from "../LeftMenu/LeftMenu";

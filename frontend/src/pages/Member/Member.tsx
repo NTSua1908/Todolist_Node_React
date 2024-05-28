@@ -9,7 +9,7 @@ import Modal, { ModalType } from "../../components/Modal/Modal";
 import SelectBox from "../../components/SelectBox/SelectBox";
 import ProjectRole from "../../enums/ProjectRole";
 import { useTheme } from "../../contexts/ThemeContext";
-import { userProjectMembes, userSelects } from "../../mock/user";
+import { userProjectMembes, userSelects } from "../../mock/user.mock";
 import ProjectShareModel from "../../models/ProjectModel/ProjectShareModel";
 import "./member.css";
 import ProjectMemberModel from "../../models/User/ProjectMemberModel";

@@ -1,0 +1,54 @@
+.taskChildDetail {
+  /* border-top: 1px solid #ccc; */
+  border-bottom: 1px solid #ccc;
+}
+
+.taskChildDetail .taskChildDetail-header {
+  display: flex;
+  align-items: center;
+  padding: 5px 15px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.taskChildDetail .taskChildDetail-container {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  margin-left: 30px;
+  align-items: center;
+}
+
+.taskChildDetail .taskChildDetail-index {
+  font-weight: bold;
+  color: var(--main-color);
+}
+
+.taskChildDetail .taskChildDetail-header .taskChildDetail-more {
+  transition: transform 0.2s ease-in-out;
+}
+
+.taskChildDetail .taskChildDetail-header .taskChildDetail-more.hide {
+  transform: rotate(180deg);
+}
+
+.taskChildDetail .taskChildDetail-body {
+  max-height: 1500px;
+  transition: max-height 0.4s ease-in;
+  overflow: hidden;
+}
+
+.taskChildDetail .taskChildDetail-body .taskChildDetail-body-container {
+  padding: 15px;
+}
+
+.taskChildDetail .taskChildDetail-body.hide {
+  max-height: 0;
+  transition: max-height 0.4s ease-out;
+}
+
+.taskChildDetail .taskChildDetail-body .taskChildDetail-body-deadline {
+  font-style: italic;
+  font-size: 14px;
+  padding: 5px 0px;
+}

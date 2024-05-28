@@ -1,0 +1,36 @@
+.checkBox {
+  position: relative;
+  display: flex;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.checkBox .checkBox-check,
+.checkBox .checkBox-uncheck {
+  display: none;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  color: green;
+}
+
+.checkBox input {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkBox input:checked ~ .checkBox-check {
+  display: flex;
+}
+
+.checkBox input:not(:checked) ~ .checkBox-uncheck {
+  display: flex;
+}

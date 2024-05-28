@@ -9,7 +9,7 @@ import Modal, { ModalType } from "../../components/Modal/Modal";
 import Percentage from "../../components/Percentage/Percentage";
 import { getProgressColor } from "../../helper/Common";
 import { useTheme } from "../../contexts/ThemeContext";
-import { labels } from "../../mock/labels";
+import { labels } from "../../mock/labels.mock";
 import LabelListModel from "../../models/LabelModel/LabelListModel";
 import "./label.css";
 

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./leftMenu.css";
 import { MdClose, MdDashboard } from "react-icons/md";
 import Logo from "../../images/Logo";
-import { userLogin } from "../../mock/user";
+import { userLogin } from "../../mock/user.mock";
 import { FaAngleLeft, FaSignOutAlt } from "react-icons/fa";
 import { useTheme } from "../../contexts/ThemeContext";
 import { FaUser } from "react-icons/fa";

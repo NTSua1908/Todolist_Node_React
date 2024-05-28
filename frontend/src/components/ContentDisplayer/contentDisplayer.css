@@ -1,0 +1,168 @@
+.custom-paragraph {
+  line-height: 2.5;
+  text-indent: 20px;
+  text-align: justify;
+}
+
+/* Custom styles for images */
+.custom-image {
+  max-width: 90%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Custom styles for links */
+.custom-link {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.custom-link:hover {
+  text-decoration: underline;
+}
+
+/* Custom styles for headings */
+.custom-heading1 {
+  font-size: 2em;
+  line-height: 50px;
+  padding: 10px 0px;
+}
+
+.custom-heading2 {
+  font-size: 1.5em;
+  line-height: 50px;
+  padding: 10px 0px;
+}
+
+.custom-heading3 {
+  font-size: 1.17em;
+  line-height: 50px;
+  padding: 10px 0px;
+}
+
+.custom-heading4 {
+  font-size: 1em;
+  line-height: 50px;
+  padding: 10px 0px;
+}
+
+.custom-heading5 {
+  font-size: 0.83em;
+  line-height: 50px;
+  padding: 10px 0px;
+}
+
+.custom-heading6 {
+  font-size: 0.67em;
+  line-height: 50px;
+  padding: 10px 0px;
+}
+
+.custom-list-u {
+  list-style: none;
+  padding: 0;
+  margin-left: 1em;
+}
+
+.custom-list-u .custom-list-item {
+  padding-left: 1.5em;
+  position: relative;
+  line-height: 2.3;
+}
+
+.custom-list-u .custom-list-item::before {
+  content: "\2022"; /* Bullet character */
+  color: #3498db; /* Bullet color */
+  font-size: 1.5em;
+  position: absolute;
+  left: 0;
+  top: -8px;
+}
+
+.custom-list-o {
+  list-style: decimal;
+  padding: 0;
+  margin-left: 1em;
+}
+
+.custom-list-o .custom-list-item {
+  padding-left: 0.5em;
+  position: relative;
+  line-height: 2.3;
+}
+
+.custom-list-item {
+  text-align: justify;
+}
+
+.custom-list-u .custom-list-u,
+.custom-list-o .custom-list-u,
+.custom-list-o .custom-list-o,
+.custom-list-u .custom-list-o {
+  margin-left: 20px;
+}
+
+/* Custom styles for blockquotes */
+.custom-blockquote {
+  border-left: 4px solid #3498db;
+  padding-left: 1em;
+  margin-left: 0;
+  font-style: italic;
+  color: #555;
+}
+
+/* Custom styles for horizontal rule */
+.custom-hr {
+  border: 1px solid #ddd;
+  margin: 1em 0;
+}
+
+/* Custom styles for pre tag */
+.blog-pre {
+  background-color: #81818118;
+  padding: 1em;
+  border-radius: 5px;
+  position: relative;
+}
+.blog-pre-container {
+  overflow: auto;
+  line-height: 2 !important;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  overflow: hidden;
+  line-height: 2;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #3498db;
+}
+
+.custom-table tr:nth-child(even) {
+  background-color: #8181813a;
+}
+
+.custom-table th {
+  background-color: #2980b9;
+  color: #ecf0f1;
+}
+
+.custom-table tr:hover {
+  background-color: #a6c2d4;
+}
+
+.blog-code {
+  font-size: 0.9em;
+  background-color: #81818118;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}

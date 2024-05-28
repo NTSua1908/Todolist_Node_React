@@ -4,7 +4,7 @@ import { MdClose, MdDelete, MdEdit, MdSave } from "react-icons/md";
 import ProjectRole from "../../enums/ProjectRole";
 import { projectRoles } from "../../helper/Common";
 import { useTheme } from "../../contexts/ThemeContext";
-import { userSelects } from "../../mock/user";
+import { userSelects } from "../../mock/user.mock";
 import ProjectShareModel from "../../models/ProjectModel/ProjectShareModel";
 import AutoComplete, { AutoCompleteItem } from "../AutoComplete/AutoComplete";
 import Loading from "../Loading/Loading";

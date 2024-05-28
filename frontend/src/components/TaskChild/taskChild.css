@@ -1,0 +1,14 @@
+.taskChild {
+  margin-top: 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-color: #ccc;
+  border-style: solid;
+  border-width: 2px 2px 0px 2px;
+}
+
+.taskChild .taskChild-title {
+  text-align: center;
+  padding: 10px 0px;
+  border-bottom: 1px solid #ccc;
+}

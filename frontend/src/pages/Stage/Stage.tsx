@@ -5,7 +5,7 @@ import { IoIosAdd } from "react-icons/io";
 import StageListModel from "../../models/StageModel/StageListModel";
 import { useTheme } from "../../contexts/ThemeContext";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { stageList } from "../../mock/stage";
+import { stageList } from "../../mock/stage.mock";
 import Loading from "../../components/Loading/Loading";
 import Modal, { ModalType } from "../../components/Modal/Modal";
 import AddStageBox from "../../components/AddStageBox/AddStageBox";

@@ -1,0 +1,665 @@
+import { Pagination, Spin, notification } from "antd";
+import { AxiosError } from "axios";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import { CiEdit, CiFlag1 } from "react-icons/ci";
+import { ImReply } from "react-icons/im";
+import { MdDeleteOutline } from "react-icons/md";
+import { SlOptionsVertical } from "react-icons/sl";
+import { TiArrowRight } from "react-icons/ti";
+import { formatDayAgo } from "../../helper/DateHelper";
+import { FetchingErrorHandler } from "../../helper/FetchingErrorHandler";
+import DefaultAvatar from "../../images/default_avatar.png";
+import {
+  CommentCreateModel,
+  CommentDetailModel,
+  CommentUpdateModel,
+} from "../../models/Comment/CommentModel";
+import BasicEditor from "../BasicEditor/BasicEditor";
+import ContentDisplayer from "../ContentDisplayer/ContentDisplayer";
+import Modal, { ModalType } from "../Modal/Modal";
+import "./commentTree.css";
+import { useTheme } from "../../contexts/ThemeContext";
+
+const amoutPerPage = 5;
+
+interface CommentProps {
+  comment: CommentDetailModel;
+  addParentComment?: (comment: CommentDetailModel) => void;
+  onDelete: (id: string) => void;
+  taskId: string; //for create reply
+  parentId: string; //for create reply
+  setOnConfirm: React.Dispatch<React.SetStateAction<() => void>>;
+  setOnCancel: React.Dispatch<React.SetStateAction<() => void>>;
+  setShowDeleteConfirm: React.Dispatch<React.SetStateAction<boolean>>;
+  isAuthenticated: boolean;
+  showRequireLogin: () => void;
+}
+
+const Comment = React.memo(
+  ({
+    comment,
+    addParentComment,
+    onDelete,
+    taskId,
+    parentId,
+    setOnConfirm,
+    setOnCancel,
+    setShowDeleteConfirm,
+    isAuthenticated,
+    showRequireLogin,
+  }: CommentProps) => {
+    const [isReply, setReply] = useState(false);
+    const [isEdit, setEdit] = useState(false);
+    const [showComment, setShowComment] = useState(false);
+    const [replies, setReplies] = useState(comment.replies ?? []); // list comment reply
+    const [isShowOption, setShowOption] = useState(false);
+    const optionRef = useRef<HTMLDivElement>(null);
+    const [content, setContent] = useState(comment.content);
+    const [editContent, setEditContent] = useState(comment.content);
+    const [totalCommentCount, setTotalCommentCount] = useState(
+      comment.replyCount
+    );
+
+    const [api, contextHolder] = notification.useNotification();
+    const { theme } = useTheme();
+
+    //Pagination for reply
+    const [currentPage, setCurrentPage] = useState(
+      Math.ceil(replies.length / amoutPerPage)
+    );
+    const handleLoadMoreReplies = () => {
+      // if (!isLoadingReply) {
+      //   setLoadingReply(true);
+      //   GetPostCommentReply(taskId, comment.id, currentPage, amoutPerPage)
+      //     .then((res) => {
+      //       setCurrentPage(currentPage + 1);
+      //       setReplies([...replies, ...res.data.data]);
+      //     })
+      //     .catch((error: AxiosError) => {
+      //       FetchingErrorHandler(error, openNotificationFailure);
+      //     })
+      //     .finally(() => {
+      //       setLoadingReply(false);
+      //     });
+      // }
+      if (!isLoadingReply) {
+        setLoadingReply(true);
+        new Promise((r) => setTimeout(r, 1500)).then(() => {
+          setReplies([...replies, ...comment.replies]);
+          setLoadingReply(false);
+        });
+      }
+    };
+    //add reply
+    const [addReply, setAddReply] = useState("");
+    const [isLoadingReply, setLoadingReply] = useState(false);
+
+    const handleReply = async () => {
+      const commentReply: CommentCreateModel = {
+        content: addReply,
+        parentId: parentId,
+        replyFor: comment.replyFor.id,
+        taskId: taskId,
+      };
+
+      // await AddPostComment(commentReply).then((res) => {
+      // console.log(res.data);
+      // if (addParentComment) {
+      //   addParentComment(res.data);
+      // } else {
+      //   setReplies([res.data, ...replies]);
+      //   if (totalCommentCount == 0) {
+      //     setTotalCommentCount(1);
+      //     setCurrentPage(1);
+      //     setShowComment(true);
+      //   }
+      // }
+      // });
+
+      setAddReply("");
+      setReply(false);
+    };
+
+    const handleCancelReply = () => {
+      setAddReply("");
+      setReply(false);
+    };
+
+    const handleReplyClick = () => {
+      setReply(!isReply);
+    };
+
+    const handleShowReplyClick = () => {
+      setShowComment(!showComment);
+      if (replies.length == 0) {
+        // setLoadingReply(true);
+        // GetPostCommentReply(taskId, comment.id, 0, amoutPerPage)
+        //   .then((res) => {
+        //     setCurrentPage(currentPage + 1);
+        //     setReplies([...replies, ...res.data.data]);
+        //   })
+        //   .catch((error: AxiosError) => {
+        //     FetchingErrorHandler(error, openNotificationFailure);
+        //   })
+        //   .finally(() => {
+        //     setLoadingReply(false);
+        //   });
+
+        setLoadingReply(true);
+        new Promise((r) => setTimeout(r, 1500)).then(() => {
+          setReplies([...replies, ...comment.replies]);
+          setLoadingReply(false);
+        });
+      }
+    };
+
+    const handleShowOption = () => {
+      setShowOption(!isShowOption);
+    };
+
+    useEffect(() => {
+      const handleClickOutside = (event: MouseEvent) => {
+        if (
+          optionRef.current &&
+          !optionRef.current.contains(event.target as Node)
+        ) {
+          setShowOption(false);
+        }
+      };
+
+      document.addEventListener("click", handleClickOutside);
+
+      return () => {
+        document.removeEventListener("click", handleClickOutside);
+      };
+    }, []);
+
+    const handleSaveEditComment = async (id: string) => {
+      const comment: CommentUpdateModel = {
+        content: editContent,
+      };
+      // UpdatePostComment(id, comment)
+      //   .then((res) => {
+      //     setContent(editContent);
+      //     setEdit(false);
+      //     openNotificationSuccess("Updated successfully");
+      //   })
+      //   .catch((error: AxiosError) => {
+      //     FetchingErrorHandler(error, openNotificationFailure);
+      //   });
+    };
+
+    const handleCancelEditComment = () => {
+      setEditContent(content);
+      setEdit(false);
+    };
+
+    const AddItsReply = (comment: CommentDetailModel) => {
+      setReplies([...replies, comment]);
+    };
+
+    const handleDeleteComment = (id: string) => {
+      // DeletePostComment(id)
+      //   .then((res) => {
+      //     setReplies(replies.filter((x) => x.id != id));
+      //     openNotificationSuccess("Deleted successfully");
+      //   })
+      //   .catch((error: AxiosError) => {
+      //     const errors = (error.response?.data as any).errors;
+      //     const errorMessage = errors.join("\n") as string;
+      //     openNotificationFailure(errorMessage);
+      //   });
+    };
+
+    const openNotificationSuccess = (message: string) => {
+      api.info({
+        message: `Notification`,
+        description: message,
+        placement: "topRight",
+      });
+    };
+
+    const openNotificationFailure = (message: string) => {
+      api.error({
+        message: `Notification`,
+        description: message,
+        placement: "topRight",
+        type: "error",
+      });
+    };
+
+    return (
+      <div className={`comment-child ${theme}`}>
+        {contextHolder}
+        <div className="comment-child-header">
+          <img
+            src={comment.user.avatar ?? DefaultAvatar}
+            alt="User Avatar"
+            className="comment-child-header-avatar"
+          />
+        </div>
+        <div className="comment-child-content">
+          {isEdit ? (
+            <ReplyForm
+              content={editContent}
+              setContent={setEditContent}
+              onSave={() => {
+                return handleSaveEditComment(comment.id);
+              }}
+              onCancel={handleCancelEditComment}
+              parentComment={null}
+              isAuthenticated={isAuthenticated}
+              showRequireLogin={showRequireLogin}
+            />
+          ) : (
+            <div className="comment-child-content-container">
+              <div className="comment-child-content-left">
+                <div className="comment-child-content-details">
+                  <span className="comment-child-content-details-fullname">
+                    {comment.user.displayName}
+                  </span>
+                  <span className="comment-child-content-details-username">
+                    @{comment.user.username}
+                  </span>
+                  <span className="comment-child-content-details-date">
+                    {formatDayAgo(comment.createdDate)}
+                  </span>
+                </div>
+                <div
+                  className="comment-child-content-option"
+                  ref={optionRef}
+                  onClick={handleShowOption}
+                >
+                  <SlOptionsVertical />
+                  <div
+                    className={`comment-child-content-option-menu ${
+                      isShowOption && "show"
+                    }`}
+                  >
+                    <ul>
+                      {!comment.isMyComment && (
+                        <li className="comment-child-content-option-menu-item">
+                          <CiFlag1 />
+                          <span>Report</span>
+                        </li>
+                      )}
+
+                      {comment.isMyComment && (
+                        <>
+                          <li
+                            className="comment-child-content-option-menu-item"
+                            onClick={() => {
+                              setEdit(true);
+                            }}
+                          >
+                            <CiEdit /> <span>Edit</span>
+                          </li>
+                          <li
+                            className="comment-child-content-option-menu-item"
+                            onClick={() => {
+                              console.log(comment);
+                              setOnConfirm(() => () => {
+                                onDelete(comment.id);
+                              });
+                              setShowDeleteConfirm(true);
+                            }}
+                          >
+                            <MdDeleteOutline />
+                            <span>Delete</span>
+                          </li>
+                        </>
+                      )}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div className="comment-child-content-message">
+                {/* <Link to={`/user/profile/${"fill-later"}`}>
+                  @{comment.replyFor}
+                </Link>{" "}
+                {content} */}
+                <ContentDisplayer
+                  content={
+                    `[@${comment.replyFor}](${`/user/${comment.user.id}`}) ` +
+                    (content.startsWith(`\``) ? "\n" + content : content)
+                  }
+                />
+              </div>
+              <div className="comment-child-content-function">
+                <div
+                  className="comment-child-content-function-reply"
+                  onClick={handleReplyClick}
+                >
+                  Reply
+                </div>
+              </div>
+            </div>
+          )}
+
+          {isReply && (
+            <div className="comment-child-content-form">
+              <div className="comment-child-content-form-icon">
+                <ImReply />
+              </div>
+              <ReplyForm
+                autoFocus
+                content={addReply}
+                setContent={setAddReply}
+                onSave={handleReply}
+                onCancel={handleCancelReply}
+                parentComment={comment.id}
+                isAuthenticated={isAuthenticated}
+                showRequireLogin={showRequireLogin}
+              />
+            </div>
+          )}
+
+          {totalCommentCount > 0 && (
+            <div
+              className="comment-child-content-showComment"
+              onClick={handleShowReplyClick}
+            >
+              <div
+                className={`comment-child-content-showComment-button ${
+                  showComment && "show"
+                }`}
+              >
+                <TiArrowRight />
+              </div>
+              <div className="comment-child-content-showComment-label">
+                Show replies
+              </div>
+            </div>
+          )}
+
+          <div
+            className={`comment-child-content-replies ${
+              showComment && replies && "show"
+            }`}
+          >
+            {replies &&
+              replies.map((reply) => (
+                <Comment
+                  key={reply.id}
+                  taskId={taskId}
+                  parentId={comment.id}
+                  comment={reply}
+                  addParentComment={AddItsReply}
+                  onDelete={handleDeleteComment}
+                  setOnCancel={setOnCancel}
+                  setOnConfirm={setOnConfirm}
+                  setShowDeleteConfirm={setShowDeleteConfirm}
+                  isAuthenticated={isAuthenticated}
+                  showRequireLogin={showRequireLogin}
+                />
+              ))}
+            {isLoadingReply && (
+              <div className="comment-child-content-loading">
+                <Spin />
+              </div>
+            )}
+            {!isLoadingReply &&
+              currentPage <=
+                Math.ceil(totalCommentCount / amoutPerPage) - 1 && (
+                <div
+                  className="comment-child-content-replies-more"
+                  onClick={handleLoadMoreReplies}
+                >
+                  Show more comments...
+                </div>
+              )}
+          </div>
+        </div>
+      </div>
+    );
+  }
+);
+
+interface ReplyFormProps {
+  onSave: () => Promise<void>;
+  onCancel: () => void;
+  content: string;
+  autoFocus?: boolean;
+  parentComment: string | null;
+  setContent: React.Dispatch<React.SetStateAction<string>>;
+  isAuthenticated: boolean;
+  showRequireLogin: () => void;
+}
+
+export const ReplyForm: React.FC<ReplyFormProps> = ({
+  onSave,
+  onCancel,
+  autoFocus,
+  content,
+  setContent,
+  isAuthenticated,
+  showRequireLogin,
+}) => {
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(e.currentTarget.value);
+  };
+
+  const [api, contextHolder] = notification.useNotification();
+  const [loading, setLoading] = useState(false);
+
+  const handleSavePost = () => {
+    // if (isAuthenticated) {
+    //   if (!loading) {
+    //     setLoading(true);
+    //     onSave()
+    //       .then(() => {
+    //         openNotificationSuccess("Post successful");
+    //       })
+    //       .catch((error: AxiosError) => {
+    //         FetchingErrorHandler(error, openNotificationFailure);
+    //       })
+    //       .finally(() => {
+    //         setLoading(false);
+    //       });
+    //   }
+    // } else {
+    //   showRequireLogin();
+    // }
+  };
+
+  const openNotificationSuccess = (message: string) => {
+    api.info({
+      message: `Notification`,
+      description: message,
+      placement: "topRight",
+    });
+  };
+
+  const openNotificationFailure = (message: string) => {
+    api.error({
+      message: `Notification`,
+      description: message,
+      placement: "topRight",
+      type: "error",
+    });
+  };
+
+  return (
+    <div className="comment-reply-form">
+      {contextHolder}
+      <div className="comment-reply-form-text">
+        <BasicEditor setValue={setContent} value={content} />
+      </div>
+      <div className="comment-reply-form-function">
+        <button
+          className="comment-reply-form-function-save"
+          onClick={handleSavePost}
+          disabled={content.length === 0}
+        >
+          Save changes
+          {loading && (
+            <Spin className="comment-reply-form-function-save-spin" />
+          )}
+        </button>
+        <button
+          className="comment-reply-form-function-cancel"
+          onClick={onCancel}
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export interface CommentTreeProps {
+  taskId: string; //for create reply
+  userName: string; //for create reply
+  data: CommentDetailModel[];
+  page: number;
+  amount: number;
+  totalCount: number;
+}
+
+const CommentsTree = ({
+  taskId,
+  userName,
+  data,
+  page,
+  amount,
+  totalCount,
+}: CommentTreeProps) => {
+  const isAuthenticated = localStorage.getItem("token") !== null;
+  const [comments, setComments] = useState<CommentDetailModel[]>([]);
+  const [reply, setReply] = useState("");
+  const [api, contextHolder] = notification.useNotification();
+  const [isRequiredLogin, setRequiredLogin] = useState(false);
+
+  const handleOnAddComment = async () => {
+    const comment: CommentCreateModel = {
+      content: reply,
+      parentId: undefined,
+      replyFor: userName,
+      taskId: taskId,
+    };
+
+    // await AddPostComment(comment)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     setComments([res.data, ...comments]);
+    //   })
+    //   .catch((error: AxiosError) => {
+    //     FetchingErrorHandler(error, openNotificationFailure);
+    //   });
+    setReply("");
+  };
+
+  const handleDeleteComment = (id: string) => {
+    // DeletePostComment(id)
+    //   .then((res) => {
+    //     setComments(comments.filter((x) => x.id != id));
+    //     openNotificationSuccess("Deleted successfully");
+    //   })
+    //   .catch((error: AxiosError) => {
+    //     FetchingErrorHandler(error, openNotificationFailure);
+    //   });
+  };
+
+  const handleOnCancelComment = () => {
+    setReply("");
+  };
+
+  useEffect(() => {
+    setComments(data);
+  }, [data]);
+
+  const onChangePage = (page: number, pageSize: Number) => {
+    // dispatch(setPostCommentPage(page - 1));
+  };
+
+  const openNotificationSuccess = (message: string) => {
+    api.info({
+      message: `Notification`,
+      description: message,
+      placement: "topRight",
+    });
+  };
+
+  const openNotificationFailure = (message: string) => {
+    api.error({
+      message: `Notification`,
+      description: message,
+      placement: "topRight",
+      type: "error",
+    });
+  };
+
+  const [onConfirm, setOnConfirm] = useState(() => () => {
+    console.log("state");
+  });
+  const [onCancel, setOnCancel] = useState(() => () => {
+    setShowDeleteConfirm(false);
+  });
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+
+  const handleCloseRequiredLogin = () => {
+    setRequiredLogin(false);
+  };
+
+  const showRequireLogin = () => {
+    setRequiredLogin(true);
+  };
+
+  return (
+    <div className="comments-tree">
+      {contextHolder}
+      <div className="comments-tree-new">
+        <ReplyForm
+          content={reply}
+          setContent={setReply}
+          onSave={handleOnAddComment}
+          onCancel={handleOnCancelComment}
+          parentComment={null}
+          isAuthenticated={isAuthenticated}
+          showRequireLogin={showRequireLogin}
+        />
+      </div>
+      {comments.length > 0 ? (
+        <div className="comments-tree-list">
+          {comments.map((comment) => (
+            <Comment
+              key={comment.id}
+              taskId={taskId}
+              parentId={comment.id}
+              comment={comment}
+              onDelete={handleDeleteComment}
+              setOnConfirm={setOnConfirm}
+              setOnCancel={setOnCancel}
+              setShowDeleteConfirm={setShowDeleteConfirm}
+              isAuthenticated={isAuthenticated}
+              showRequireLogin={showRequireLogin}
+            />
+          ))}
+          <div className="comments-tree-list-pagination">
+            <Pagination
+              simple
+              defaultCurrent={page + 1}
+              pageSize={amount}
+              total={totalCount}
+              onChange={onChangePage}
+            />
+          </div>
+        </div>
+      ) : (
+        <div className="comments-tree-empty">
+          <p>This post has no comments</p>
+        </div>
+      )}
+      <Modal
+        onAccept={onConfirm}
+        setShow={setShowDeleteConfirm}
+        type={ModalType.Question}
+        description="Do you really want to delete this comment? This action cannot be undone. Are you sure you want to proceed?"
+        show={showDeleteConfirm}
+      />
+    </div>
+  );
+};
+
+export default React.memo(CommentsTree);

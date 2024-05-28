@@ -6,8 +6,8 @@ export interface SubTaskModel {
   name: string;
   description: string;
   deadline: Date;
-  index: number;
   isDone: boolean;
+  index: number;
 }
 
 interface TaskDetailModel {
@@ -22,8 +22,7 @@ interface TaskDetailModel {
   tasks: SubTaskModel[];
   isFollowing: boolean;
   createdDate: Date;
-  createdById: string;
-  createdBy: string; //display name
+  createdBy: UserShortModel;
   //actities
   //comments
 }
